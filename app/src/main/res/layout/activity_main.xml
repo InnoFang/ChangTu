@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    >
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinator_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:elevation="0dp"
+            >
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                >
+
+                <com.example.innf.newchangtu.Map.widget.ContainMapLayout
+                    android:id="@+id/contain_map_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <com.baidu.mapapi.map.MapView
+                        android:id="@+id/main_map_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="420dp"/>
+                </com.example.innf.newchangtu.Map.widget.ContainMapLayout>
+
+
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/action_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    >
+
+                </android.support.v7.widget.Toolbar>
+            </android.support.design.widget.CollapsingToolbarLayout>
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/position_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_collapseMode="pin"
+            />
+
+
+        <com.getbase.floatingactionbutton.FloatingActionsMenu
+            android:id="@+id/floating_actions_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="bottom|right|end"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            fab:fab_addButtonColorNormal="@color/fab_color"
+            fab:fab_addButtonColorPressed="@color/fab_color"
+            fab:fab_addButtonPlusIconColor="@color/white_pressed"
+            fab:fab_labelStyle="@style/menu_labels_style">
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/action_exchange_map"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_addButtonColorNormal="@color/fab_color"
+                fab:fab_addButtonColorPressed="@color/fab_color"
+                fab:fab_addButtonSize="mini"
+                fab:fab_colorNormal="@color/fab_color"
+                fab:fab_colorPressed="@color/fab_color"
+                fab:fab_icon="@drawable/fab_exchange_map"
+                fab:fab_size="mini"
+                fab:fab_title="@string/fab_exchange_map_site"
+                />
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/action_exchange_model"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_addButtonColorNormal="@color/fab_color"
+                fab:fab_addButtonColorPressed="@color/fab_color"
+                fab:fab_addButtonSize="mini"
+                fab:fab_colorNormal="@color/fab_color"
+                fab:fab_colorPressed="@color/fab_color"
+                fab:fab_icon="@drawable/fab_exchange_model"
+                fab:fab_size="mini"
+                fab:fab_title="@string/fab_exchange_model_compass"
+                />
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/action_fast_broadcast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_addButtonColorNormal="@color/fab_color"
+                fab:fab_addButtonColorPressed="@color/fab_color"
+                fab:fab_addButtonSize="mini"
+                fab:fab_colorNormal="@color/fab_color"
+                fab:fab_colorPressed="@color/fab_color"
+                fab:fab_icon="@drawable/fab_fast_broadcast"
+                fab:fab_size="mini"
+                fab:fab_title="@string/fab_fast_broadcast"
+                />
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/action_fab_recognizes_license_plate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_addButtonSize="mini"
+                fab:fab_colorNormal="@color/fab_color"
+                fab:fab_colorPressed="@color/fab_color"
+                fab:fab_icon="@drawable/fab_photo_record"
+                fab:fab_size="mini"
+                fab:fab_title="@string/fab_photo_record"
+                />
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/action_fast_local"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_addButtonSize="mini"
+                fab:fab_colorNormal="@color/fab_color"
+                fab:fab_colorPressed="@color/fab_color"
+                fab:fab_icon="@drawable/fab_fast_local"
+                fab:fab_size="mini"
+                fab:fab_title="@string/fab_fast_local"
+                />
+        </com.getbase.floatingactionbutton.FloatingActionsMenu>
+    </android.support.design.widget.CoordinatorLayout>
+
+    <!--侧滑导航栏-->
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/drawer_header"
+        app:menu="@menu/drawer_menu"
+        />
+</android.support.v4.widget.DrawerLayout>

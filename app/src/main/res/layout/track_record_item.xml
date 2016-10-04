@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="8dp"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/date_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textColor="#95bfef"
+            android:gravity="center"
+            tools:text="2016-8-25"/>
+        <TextView
+            android:id="@+id/time_text_view"
+            android:padding="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#95bfef"
+            android:gravity="center"
+            tools:text="16:01:52"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="20dp"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        >
+        <View
+            android:id="@+id/view_up"
+            android:layout_width="0.5dp"
+            android:layout_height="42dp"
+            android:background="@drawable/selector_line"
+            />
+        <ImageView
+            android:id="@+id/circle_image_view"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:background="@drawable/selector_circle"
+            />
+        <View
+            android:id="@+id/view_down"
+            android:layout_width="0.5dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_line"
+            />
+    </LinearLayout>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="6dp"
+        app:cardBackgroundColor="@color/cardview_light_background"
+        >
+
+        <LinearLayout
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/start_position_text_view"
+                android:padding="10dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="#0dbb27"
+                tools:text="山西省太原市尖草坪区中北大学"/>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_height="0.5dp"
+                android:layout_gravity="center"
+                android:background="@drawable/selector_line"/>
+
+            <TextView
+                android:id="@+id/end_position_text_view"
+                android:padding="10dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="#27a8b4"
+                tools:text="山西省太原市尖草坪区胜利桥东"/>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>

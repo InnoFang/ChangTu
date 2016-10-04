@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/fast_send"
+        android:icon="@drawable/one_click_fast_send"
+        android:title="@string/fast_send"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/start_record"
+        android:icon="@drawable/start_record"
+        android:title="@string/start_record"
+        app:showAsAction="always"
+        />
+
+</menu>

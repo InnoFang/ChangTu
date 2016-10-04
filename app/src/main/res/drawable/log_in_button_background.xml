@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+       >
+
+    <corners
+        android:radius="5dp"
+
+        />
+
+    <stroke
+        android:width="2dp"
+        android:color="#e0aa21" /> <!-- 定义描边的宽度和描边的颜色值 -->
+    <solid
+        android:color="#f1d6b0"/>
+</shape>

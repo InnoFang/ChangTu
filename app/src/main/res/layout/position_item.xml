@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        >
+        <View
+            android:id="@+id/view_up"
+            android:layout_width="0.5dp"
+            android:layout_height="15dp"
+            android:background="@drawable/selector_line"
+            />
+        <ImageView
+            android:id="@+id/circle_image_view"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:background="@drawable/selector_circle"
+            />
+        <View
+            android:id="@+id/view_down"
+            android:layout_width="0.5dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_line"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/position_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@drawable/selector_text"
+            android:textSize="16sp"
+            tools:text="你当前的位置：中北大学"
+            />
+
+        <TextView
+            android:id="@+id/date_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#95bfef"
+            android:textSize="13sp"
+            tools:text="2016-8-24 22:52:15"
+            />
+
+        <TextView
+            android:id="@+id/message_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="12sp"
+            android:layout_marginBottom="10dp"
+            android:textColor="#808080"
+            tools:text="距上一个目的地用时50分钟，行程67公里"
+            />
+        <View
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#669999"/>
+    </LinearLayout>
+</LinearLayout>

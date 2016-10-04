@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/nearby_comments_name_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@drawable/selector_text"
+            android:textSize="16sp"
+            tools:text="Inno"
+            />
+
+        <TextView
+            android:id="@+id/nearby_comments_content_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:layout_marginBottom="10dp"
+            android:textColor="#808080"
+            tools:text="太原未来几天晴到多云，最低温度在-3～1℃左右，最高温度在13℃左右。太原的特产有段亩砚、晋中剪纸、竹叶青酒、山西老陈醋等。"
+            />
+
+        <TextView
+            android:id="@+id/nearby_comments_date_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#95bfef"
+            android:textSize="13sp"
+            tools:text="2016-8-24 22:52:15"
+            />
+
+        <View
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#669999"/>
+    </LinearLayout>
+</LinearLayout>

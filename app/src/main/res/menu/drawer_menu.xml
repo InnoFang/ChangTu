@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/navigation_sub_2"
+          android:title="安全出行">
+        <menu>
+            <item android:id="@+id/drawer_menu_nearby"
+                  android:checkable="true"
+                  android:title="@string/drawer_menu_nearby"
+                  android:icon="@drawable/drawer_menu_nearby"/>
+            <item android:id="@+id/drawer_menu_track"
+                  android:checkable="true"
+                  android:title="@string/drawer_menu_track"
+                  android:icon="@drawable/drawer_menu_track"/>
+        </menu>
+    </item>
+
+    <item android:id="@+id/navigation_sub_1"
+          android:title="畅途无忧">
+        <menu>
+            <item android:id="@+id/drawer_menu_track_record"
+                  android:checkable="true"
+                  android:title="@string/drawer_menu_track_record"
+                  android:icon="@drawable/drawer_menu_track_record"/>
+
+            <item android:id="@+id/drawer_menu_bind_on_account"
+                  android:checkable="true"
+                  android:title="@string/drawer_menu_relate_friends"
+                  android:icon="@drawable/drawer_menu_bind_on_account"
+                  />
+
+            <item android:id="@+id/drawer_menu_personal_setting"
+                  android:checkable="true"
+                  android:title="@string/drawer_menu_personal_setting"
+                  android:icon="@drawable/drawer_menu_personal_setting"
+                  />
+        </menu>
+    </item>
+
+</menu>
