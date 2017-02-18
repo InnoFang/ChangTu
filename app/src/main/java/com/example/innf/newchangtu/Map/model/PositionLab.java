@@ -28,11 +28,15 @@ public class PositionLab {
     private PositionLab(Context context){
 //        final Resources res = Resources.getSystem();
         mPositionList = new ArrayList<>();
-        testList();
+//        testList();
     }
 
     public List<Position> getPositionList(){
         return mPositionList;
+    }
+
+    public void setPositionList(List<Position> positionList) {
+        mPositionList = positionList;
     }
 
     public void addPosition(Position position){

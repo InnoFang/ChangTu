@@ -27,6 +27,7 @@ public class NearbyLab {
         mNearbyList = new ArrayList<>();
     }
 
+
     public static NearbyLab get(Context context){
         if (null == sNearbyLab){
             sNearbyLab = new NearbyLab(context);

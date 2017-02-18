@@ -2,119 +2,143 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
-             android:layout_height="match_parent"
-                android:orientation="vertical"
-             android:padding="20dp">
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="20dp">
 
     <android.support.v7.widget.CardView
         android:id="@+id/default_create_account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/white"
         android:layout_gravity="bottom"
         android:layout_marginTop="20dp"
+        android:clickable="true"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="10dp"
         app:cardPreventCornerOverlap="true"
-        android:clickable="true"
         >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
             android:orientation="vertical"
-            >
-        <TextView
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="@string/default_sign_up"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            style="?android:listSeparatorTextViewStyle"
-            />
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
+            android:padding="10dp"
             >
 
-            <EditText
-                android:visibility="gone"
-                android:id="@+id/account_edit_text"
-                android:singleLine="true"
+            <TextView
+
+                style="?android:listSeparatorTextViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/sign_up_hint_account"
-                android:textSize="20sp"
+                android:padding="5dp"
+                android:text="@string/default_sign_up"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 />
-        </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
-            >
-
-            <EditText
-                android:visibility="gone"
-                android:id="@+id/password_edit_text"
-                android:singleLine="true"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/sign_up_hint_password"
-                android:inputType="textPassword"
-                android:textSize="20sp" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                >
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
-            >
+                <EditText
+                    android:id="@+id/user_name_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/sign_up_hint_user_name"
+                    android:singleLine="true"
+                    android:textSize="20sp"
+                    android:visibility="gone"
+                    />
+            </android.support.design.widget.TextInputLayout>
 
-            <EditText
-                android:visibility="gone"
-                android:id="@+id/repeat_password_edit_text"
-                android:singleLine="true"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/sign_up_repeat_new_password"
-                android:textSize="20sp"
-                android:inputType="textPassword"
-                />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                >
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp">
-            <ProgressBar
-                android:id="@+id/sign_up_progress_bar"
+                <EditText
+                    android:id="@+id/account_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/sign_up_hint_account"
+                    android:singleLine="true"
+                    android:textSize="20sp"
+                    android:visibility="gone"
+                    />
+            </android.support.design.widget.TextInputLayout>
 
-                android:layout_width="wrap_content"
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"/>
-            <Button
-                android:layout_width="300dp"
-                android:id="@+id/sign_up_button"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                >
+
+                <EditText
+                    android:id="@+id/password_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/sign_up_hint_password"
+                    android:inputType="textPassword"
+                    android:singleLine="true"
+                    android:textSize="20sp"
+                    android:visibility="gone"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:text="@string/sign_up_sign_up"
-                android:visibility="gone"
-                android:layout_gravity="center"
-                />
-        </RelativeLayout>
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                >
+
+                <EditText
+                    android:id="@+id/repeat_password_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/sign_up_repeat_new_password"
+                    android:inputType="textPassword"
+                    android:singleLine="true"
+                    android:textSize="20sp"
+                    android:visibility="gone"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
+
+                <ProgressBar
+                    android:id="@+id/sign_up_progress_bar"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:visibility="gone"/>
+
+                <Button
+                    android:id="@+id/sign_up_button"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/sign_up_sign_up"
+                    android:background="@drawable/button_click_background"
+                    android:textAllCaps="false"
+                    android:visibility="gone"
+                    />
+            </RelativeLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 

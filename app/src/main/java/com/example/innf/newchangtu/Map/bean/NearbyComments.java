@@ -1,10 +1,10 @@
 package com.example.innf.newchangtu.Map.bean;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
-import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.BmobUser;
 
 /**
  * Author: Inno Fang
@@ -12,20 +12,13 @@ import cn.bmob.v3.BmobObject;
  * Description:
  */
 
-public class NearbyComments extends BmobObject{
+public class NearbyComments implements Serializable{
     private String mName;
     private String mContent;
     private Date mDate;
-
-    private List<NearbyComments> mNearbyCommentsList;
-
     public NearbyComments(){
         mDate = new Date();
-//        mNearbyCommentsList = NearbyCommentsLab.get(MyApplication.getContext()).getNearbyCommentsList();
-    }
-
-    public List<NearbyComments> getNearbyCommentsList() {
-        return mNearbyCommentsList;
+        mName = (String) BmobUser.getObjectByKey("username");
     }
 
     public void setContent(String content) {

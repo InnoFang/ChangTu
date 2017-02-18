@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/white"
     >
 
     <android.support.design.widget.CoordinatorLayout
@@ -34,12 +35,12 @@
                     android:id="@+id/contain_map_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
                     <com.baidu.mapapi.map.MapView
                         android:id="@+id/main_map_view"
                         android:layout_width="match_parent"
                         android:layout_height="420dp"/>
                 </com.example.innf.newchangtu.Map.widget.ContainMapLayout>
-
 
 
                 <android.support.v7.widget.Toolbar
@@ -59,6 +60,18 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:layout_collapseMode="pin"
+            android:visibility="invisible"
+            />
+
+        <ImageView
+            android:id="@+id/empty_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/empty_position"
+            android:background="@drawable/empty_view"
+            android:layout_gravity="bottom|center_horizontal"
+            android:padding="10dp"
+            android:visibility="visible"
             />
 
 

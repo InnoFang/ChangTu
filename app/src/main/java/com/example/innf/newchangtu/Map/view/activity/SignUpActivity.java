@@ -30,6 +30,7 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
 
     private User mUser;
     private EditText mAccountEditText;
+    private EditText mUserNameEditText;
     private EditText mPasswordEditText;
     private EditText mRepeatPasswordEditText;
     private CardView mDefaultCreatAccountCardView;
@@ -49,6 +50,7 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
             mUser = new User();
         }
         mAccountEditText = (EditText) findViewById(R.id.account_edit_text);
+        mUserNameEditText = (EditText) findViewById(R.id.user_name_edit_text);
         mPasswordEditText = (EditText) findViewById(R.id.password_edit_text);
         mSignUpButton = (Button) findViewById(R.id.sign_up_button);
         mSignUpProgressBar = (ProgressBar) findViewById(R.id.sign_up_progress_bar);
@@ -70,12 +72,14 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
             case R.id.default_create_account:
                 /*显示默认注册的相关操作*/
                 if (isDefaultOpen){
+                    mUserNameEditText.setVisibility(View.VISIBLE);
                     mAccountEditText.setVisibility(View.VISIBLE);
                     mPasswordEditText.setVisibility(View.VISIBLE);
                     mRepeatPasswordEditText.setVisibility(View.VISIBLE);
                     mSignUpButton.setVisibility(View.VISIBLE);
                 }else {
                     mAccountEditText.setVisibility(View.GONE);
+                    mUserNameEditText.setVisibility(View.GONE);
                     mPasswordEditText.setVisibility(View.GONE);
                     mRepeatPasswordEditText.setVisibility(View.GONE);
                     mSignUpButton.setVisibility(View.GONE);
@@ -84,14 +88,16 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.sign_up_button:
                 /*默认注册操作*/
+                String name = mUserNameEditText.getText().toString().trim();
                 String username = mAccountEditText.getText().toString().trim();
                 String password = mPasswordEditText.getText().toString().trim();
                 String repeatPassword = mRepeatPasswordEditText.getText().toString().trim();
-                if (username.equals("") || password.equals("")){
+                if (username.equals("") || password.equals("") || name.equals("")){
                     Snackbar.make(mSignUpButton, "不能为空", Snackbar.LENGTH_LONG).show();
                 }else if (!password.equals(repeatPassword)){
                     Snackbar.make(mSignUpButton, "两次输入的密码不一致", Snackbar.LENGTH_LONG).show();
                 }else {
+                    mUser.setName(name);
                     mUser.setUsername(username);
                     mUser.setPassword(password);
                     mUser.signUp(new SaveListener<User>() {

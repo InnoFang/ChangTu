@@ -152,4 +152,10 @@ public class TrackRecordListActivity extends BaseActivity {
             mEmptyTextView.setVisibility(View.GONE);
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateUI();
+    }
 }

@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
@@ -14,14 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
-import android.widget.ZoomControls;
 
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
@@ -30,7 +25,6 @@ import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MarkerOptions;
-import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.model.LatLng;
@@ -49,19 +43,26 @@ import com.example.innf.newchangtu.Map.GsonService;
 import com.example.innf.newchangtu.Map.RealtimeTrackData;
 import com.example.innf.newchangtu.Map.view.base.BaseActivity;
 import com.example.innf.newchangtu.R;
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
  * 足迹 界面，用于显示地图等相关操作
  */
-public class TrackActivity extends BaseActivity {
+public class TrackActivity extends BaseActivity implements OnGetGeoCoderResultListener {
 
     private static final String TAG = "TrackActivity";
 
-    private Button strBtn,endBtn;
-
+    private Button strBtn, endBtn;
+    private FloatingActionButton mActionStartTrack;
+    private FloatingActionButton mActionExchangeMap;
+    private FloatingActionsMenu mFloatingActionsMenu;
+    private static boolean needdraw=true;
 
     int gatherInterval = 3;  //位置采集周期 (s)
     int packInterval = 10;  //打包周期 (s)
@@ -69,6 +70,7 @@ public class TrackActivity extends BaseActivity {
     long serviceId = 124718;// 鹰眼服务ID
     int traceType = 2;  //轨迹服务类型
     private static OnStartTraceListener startTraceListener = null;  //开启轨迹服务监听器
+
 
 
     private static OnEntityListener entityListener = null;
@@ -82,13 +84,15 @@ public class TrackActivity extends BaseActivity {
 
     private Trace trace;  // 实例化轨迹服务
     private LBSTraceClient client;  // 实例化轨迹服务客户端
-    private MapView mMapView;
-    private BaiduMap mBaiduMap;
-    private LocationClient locationClient;
-    private boolean firstLocation;
+    private static MapView mMapView;
+    private static BaiduMap mBaiduMap;
+
     private GeoCoder mSearch;
+    public static int index = 0;
+    public static LatLng stLatLng = null;
 
     private String mStatus;
+    private boolean firstLocation;
 
     public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, TrackActivity.class);
@@ -104,19 +108,58 @@ public class TrackActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.action_toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        if (null != actionBar){
+        if (null != actionBar) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+        index = 0;
 
         init();
-        initSearchGeoPoint();
         initOnEntityListener();
 
         initOnStartTraceListener();
         click();
 
+        initFAB();
+
         client.startTrace(trace, startTraceListener);  // 开启轨迹服务
 
+        Snackbar.make(mMapView, "开始绘制轨迹", Snackbar.LENGTH_LONG).show();
+    }
+
+    private void initFAB() {
+        mFloatingActionsMenu = (FloatingActionsMenu) findViewById(R.id.floating_actions_menu);
+
+        /*地图类型*/
+        mActionExchangeMap = (FloatingActionButton) findViewById(R.id.action_exchange_map);
+        mActionExchangeMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mBaiduMap.getMapType() == BaiduMap.MAP_TYPE_NORMAL) {
+                    mBaiduMap.setMapType(BaiduMap.MAP_TYPE_SATELLITE);
+                    mActionExchangeMap.setTitle(getResources().getString(R.string.fab_exchange_map_normal));
+                } else {
+                    mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
+                    mActionExchangeMap.setTitle(getResources().getString(R.string.fab_exchange_map_site));
+                }
+                mFloatingActionsMenu.toggle();
+            }
+        });
+
+        /*地图模式*/
+        mActionStartTrack = (FloatingActionButton) findViewById(R.id.action_end_track);
+        mActionStartTrack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                endTrack();
+                mFloatingActionsMenu.toggle();
+            }
+        });
+    }
+
+
+    private void endTrack() {
+        Snackbar.make(mMapView, "结束绘制轨迹", Snackbar.LENGTH_LONG).show();
+        needdraw=false;
     }
 
     @Override
@@ -127,7 +170,7 @@ public class TrackActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.send_broadcast:
                 sendSMS();
                 break;
@@ -142,7 +185,7 @@ public class TrackActivity extends BaseActivity {
         smsIntent.setData(Uri.parse("smsto:"));
         smsIntent.setType("vnd.android-dir/mms-sms");
 //            smsIntent.putExtra("address", mPhone);
-            smsIntent.putExtra("sms_body", "我现在的位置为：" + getStatus());
+        smsIntent.putExtra("sms_body", "我现在的位置为：" + getStatus());
         try {
             startActivity(smsIntent);
             Log.i("Finished sending SMS...", "");
@@ -161,8 +204,8 @@ public class TrackActivity extends BaseActivity {
     }
 
     private void click() {
-        strBtn= (Button) findViewById(R.id.star_btn);
-        endBtn= (Button) findViewById(R.id.end_btn);
+        strBtn = (Button) findViewById(R.id.star_btn);
+        endBtn = (Button) findViewById(R.id.end_btn);
         strBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -181,70 +224,14 @@ public class TrackActivity extends BaseActivity {
 
     }
 
-
-    private void initSearchGeoPoint() {
-        mBaiduMap = mMapView.getMap();
-        mSearch= GeoCoder.newInstance();// 创建地理编码检索实例
-
-        // 设置地理编码检索监听者
-        mSearch.setOnGetGeoCodeResultListener(new OnGetGeoCoderResultListener() {
-
-            @Override
-            public void onGetGeoCodeResult(GeoCodeResult geoCodeResult) {
-                if (geoCodeResult == null || geoCodeResult.error != SearchResult.ERRORNO.NO_ERROR) {
-                    Toast.makeText(TrackActivity.this, "抱歉，未能找到结果", Toast.LENGTH_LONG)
-                            .show();
-                    return;
-                }
-//                mBaiduMap.clear();
-
-                //构建markerOption，用于在地图上添加marker ，先找到位置，在添加图标
-                mBaiduMap.addOverlay(new MarkerOptions().position(geoCodeResult.getLocation())
-                        .icon(BitmapDescriptorFactory
-                                .fromResource(R.drawable.ct_map_location_32)));
-                //地图位置移动到当前位置
-                mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLng(geoCodeResult
-                        .getLocation()));
-                String strInfo = String.format("纬度：%f 经度：%f",
-                        geoCodeResult.getLocation().latitude, geoCodeResult.getLocation().longitude);
-
-
-             //   Toast.makeText(TrackActivity.this, strInfo, Toast.LENGTH_LONG).show();
-            }
-
-            //释放地理编码检索实例
-            @Override
-            public void onGetReverseGeoCodeResult(ReverseGeoCodeResult reverseGeoCodeResult) {
-
-                if (reverseGeoCodeResult == null || reverseGeoCodeResult.error != SearchResult.ERRORNO.NO_ERROR) {
-                    Toast.makeText(TrackActivity.this, "抱歉，未能找到结果", Toast.LENGTH_LONG)
-                            .show();
-                    return;
-                }
-
-//                mBaiduMap.addOverlay(new MarkerOptions().position(reverseGeoCodeResult.getLocation())
-//                        .icon(BitmapDescriptorFactory
-//                                .fromResource(R.drawable.icon_st)));
-//                //加上覆盖物
-                mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLng(reverseGeoCodeResult
-                        .getLocation()));
-                //定位
-                //Toast.makeText(TrackActivity.this, reverseGeoCodeResult.getAddress(),
-                   //     Toast.LENGTH_LONG).show();
-
-                Log.i("TGA",reverseGeoCodeResult.getAddress());
-                setStatus(reverseGeoCodeResult.getAddress());
-                //result保存翻地理编码的结果 坐标-->城市
-            }
-        });
-
-    }
-
-
-
-
     private void init() {
 
+        mSearch = GeoCoder.newInstance();
+        mSearch.setOnGetGeoCodeResultListener(this);
+
+        mMapView = (MapView) findViewById(R.id.map);
+        mBaiduMap = mMapView.getMap();
+        mMapView.showZoomControls(false);
 
         entityName = getImei(getApplicationContext());  //手机Imei值的获取，用来充当实体名
 
@@ -254,91 +241,23 @@ public class TrackActivity extends BaseActivity {
 
         client.setInterval(gatherInterval, packInterval);  //设置位置采集和打包周期
 
-
-
-        mMapView= (MapView) findViewById(R.id.map);
-        mBaiduMap=mMapView.getMap();
-        // 隐藏logo
-        View child = mMapView.getChildAt(1);
-        if (child != null && (child instanceof ImageView || child instanceof ZoomControls)){
-            child.setVisibility(View.INVISIBLE);
-        }
-        // 设置自定义图标
-//        BitmapDescriptor myMarker = BitmapDescriptorFactory
-//                .fromResource(R.drawable.icon_st);
-//        MyLocationConfiguration config = new MyLocationConfiguration(
-//                MyLocationConfiguration.LocationMode.FOLLOWING, true, myMarker);
-//        mBaiduMap.setMyLocationConfigeration(config);
-
-        //地图上比例尺
-        //mMapView.showScaleControl(false);
-        // 隐藏缩放控件
-        mMapView.showZoomControls(false);
-
-        //定位初始化
-        locationClient = new LocationClient(this);
-        firstLocation =true;
-        // 设置定位的相关配置
-        LocationClientOption option = new LocationClientOption();
-        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
-        option.setOpenGps(true);
-        option.setCoorType("bd09ll"); // 设置坐标类型
-        option.setScanSpan(1000);
-        option.setIsNeedAddress(true);//可选，设置是否需要地址信息，默认不需要
-        option.setOpenGps(true);//可选，默认false,设置是否使用gps
-        option.setIsNeedLocationDescribe(true);//可选，默认false，设置是否需要位置语义化结果，可以在BDLocation.getLocationDescribe里得到，结果类似于“在北京天安门附近”
-        option.setIsNeedLocationPoiList(true);//可选，默认false，设置是否需要POI结果，可以在BDLocation.getPoiList里得到
-        option.setIgnoreKillProcess(false);//可选，默认false，定位SDK内部是一个SERVICE，并放到了独立进程，设置是否在stop的时候杀死这个进程，默认杀死
-        option.SetIgnoreCacheException(false);//可选，默认false，设置是否收集CRASH信息，默认收集
-        option.setEnableSimulateGps(false);//可选，默认false，设置是否需要过滤gps仿真结果，默认需要
-        locationClient.setLocOption(option);
-        locationClient.registerLocationListener(new BDLocationListener() {
-            @Override
-            public void onReceiveLocation(BDLocation bdLocation) {
-                if(bdLocation==null||mMapView==null)
-                    return;
-                //构造定位数据
-                MyLocationData locData=new MyLocationData.Builder()
-                        .accuracy(bdLocation.getRadius())
-                        .direction(100).latitude(bdLocation.getLatitude())
-                        .longitude(bdLocation.getLongitude()).build();
-                mBaiduMap.setMyLocationData(locData);
-                // 第一次定位时，将地图位置移动到当前位置
-                if (firstLocation) {
-                    Log.i("III","kkkkkkkkkkkkkkkkkk");
-                    firstLocation = false;
-                    LatLng xy = new LatLng(bdLocation.getLatitude(),
-                            bdLocation.getLongitude());
-
-
-                    MapStatusUpdate status = MapStatusUpdateFactory.newLatLng(xy);
-                    mSearch.geocode(new GeoCodeOption().city("太原").address("中北大学"));
-                    mSearch.reverseGeoCode(new ReverseGeoCodeOption().location(xy));
-                    mBaiduMap.animateMapStatus(status);
-
-                    showToast(bdLocation.getAddrStr());
-                    Log.i(TAG, bdLocation.getAddrStr());
-                }
-
-            }
-        });
-
     }
+
     /**
      * 初始化设置实体状态监听器
      */
-    private void initOnEntityListener(){
-        Log.i("TGA","初始化成功");
+    private void initOnEntityListener() {
+        Log.i("TGA", "初始化成功");
 
         //实体状态监听器
-        entityListener = new OnEntityListener(){
+        entityListener = new OnEntityListener() {
 
             @Override
             public void onRequestFailedCallback(String arg0) {
                 Looper.prepare();
                 Toast.makeText(
                         getApplicationContext(),
-                        "entity请求失败的回调接口信息："+arg0,
+                        "entity请求失败的回调接口信息：" + arg0,
                         Toast.LENGTH_SHORT)
                         .show();
                 Looper.loop();
@@ -356,8 +275,9 @@ public class TrackActivity extends BaseActivity {
     }
 
 
-
-    /** 追踪开始 */
+    /**
+     * 追踪开始
+     */
     private void initOnStartTraceListener() {
 
         // 实例化开启轨迹服务回调接口
@@ -366,7 +286,7 @@ public class TrackActivity extends BaseActivity {
             @Override
             public void onTraceCallback(int arg0, String arg1) {
                 Log.i("TAG", "onTraceCallback=" + arg1);
-                if(arg0 == 0 || arg0 == 10006){
+                if (arg0 == 0 || arg0 == 10006) {
                     startRefreshThread(true);
                 }
             }
@@ -379,25 +299,64 @@ public class TrackActivity extends BaseActivity {
         };
 
 
+    }
 
+    public void onGetGeoCodeResult(GeoCodeResult result) {
+        if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
+            Toast.makeText(TrackActivity.this, "抱歉，未能找到结果", Toast.LENGTH_LONG)
+                    .show();
+            return;
+        }
+        mBaiduMap.clear();
+        //定位
+        String strInfo = String.format("纬度：%f 经度：%f",
+                result.getLocation().latitude, result.getLocation().longitude);
+        Toast.makeText(TrackActivity.this, strInfo, Toast.LENGTH_LONG).show();
+        //click()
+
+
+        //result保存地理编码的结果 城市-->坐标
+    }
+
+
+    public void onGetReverseGeoCodeResult(ReverseGeoCodeResult result) {
+        if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
+            Toast.makeText(TrackActivity.this, "抱歉，未能找到结果", Toast.LENGTH_LONG)
+                    .show();
+            return;
+        }
+        Toast.makeText(TrackActivity.this, result.getAddress(),
+                Toast.LENGTH_LONG).show();
+        Log.i("MYWEIZHI", result.getAddress());
+        setStatus(result.getAddress());
+
+        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+        SimpleDateFormat format;
+        format = new SimpleDateFormat("HH:mm:ss");
+        String str = format.format(curDate);
+        Log.e("time", "time2" + str);
+        //将时间位置信息保存到list中
+
+        //result保存翻地理编码的结果 坐标-->城市
     }
 
 
     /**
      * 轨迹刷新线程
+     *
      * @author BLYang
      */
-    private class RefreshThread extends Thread{
+    private class RefreshThread extends Thread {
 
         protected boolean refresh = true;
 
-        public void run(){
+        public void run() {
 
-            while(refresh){
+            while (refresh) {
                 queryRealtimeTrack();
-                try{
+                try {
                     Thread.sleep(packInterval * 1000);
-                }catch(InterruptedException e){
+                } catch (InterruptedException e) {
                     System.out.println("线程休眠失败");
                 }
             }
@@ -408,7 +367,7 @@ public class TrackActivity extends BaseActivity {
     /**
      * 查询实时线路
      */
-    private void queryRealtimeTrack(){
+    private void queryRealtimeTrack() {
 
         String entityName = this.entityName;
         String columnKey = "";
@@ -433,71 +392,87 @@ public class TrackActivity extends BaseActivity {
 
     /**
      * 展示实时线路图
+     *
      * @param realtimeTrack
      */
-    protected void showRealtimeTrack(String realtimeTrack){
-
-        if(refreshThread == null || !refreshThread.refresh){
+    protected void showRealtimeTrack(String realtimeTrack) {
+        if (refreshThread == null || !refreshThread.refresh) {
             return;
         }
 
         //数据以JSON形式存取
         RealtimeTrackData realtimeTrackData = GsonService.parseJson(realtimeTrack, RealtimeTrackData.class);
 
-        if(realtimeTrackData != null && realtimeTrackData.getStatus() ==0){
+        if (realtimeTrackData != null && realtimeTrackData.getStatus() == 0) {
 
             LatLng latLng = realtimeTrackData.getRealtimePoint();
 
-            if(latLng != null){
-                Log.i("TGA","当前有轨迹点");
+            if (latLng != null&&needdraw==true) {
+                Log.i("TGA", "当前有轨迹点");
                 pointList.add(latLng);
-                mSearch.reverseGeoCode(new ReverseGeoCodeOption().location(latLng));
+                index++;
+                if (index % 2 == 0) {
+                    mSearch.reverseGeoCode(new ReverseGeoCodeOption()
+                            .location(latLng));
+
+
+                }
+
+
+                if (index == 1) {
+                    stLatLng = latLng;
+                    Log.d("FFF", stLatLng.toString());
+
+
+                }
                 drawRealtimePoint(latLng);
-            }
-            else{
+            } else {
 
                 Toast.makeText(getApplicationContext(), "当前无轨迹点", Toast.LENGTH_LONG).show();
             }
 
         }
-
     }
 
     /**
      * 画出实时线路点
+     *
      * @param point
      */
-    private void drawRealtimePoint(LatLng point){
-        Log.i("TGA","绘制成功");
-
-
+    private void drawRealtimePoint(LatLng point) {
+        Log.i("TGA", "绘制成功");
+        mBaiduMap.clear();
         MapStatus mapStatus = new MapStatus.Builder().target(point).zoom(18).build();
         msUpdate = MapStatusUpdateFactory.newMapStatus(mapStatus);
-
+        realtimeBitmap = BitmapDescriptorFactory.fromResource(R.drawable.ct_map_location);
         overlay = new MarkerOptions().position(point)
-                .zIndex(9).draggable(true);
+                .icon(realtimeBitmap).zIndex(9).draggable(true);
 
-        if(pointList.size() >= 2  && pointList.size() <= 1000){
-            Log.i("TGA","绘制hongse成功");
+
+        if (pointList.size() >= 2 && pointList.size() <= 6000) {
             polyline = new PolylineOptions().width(10).color(Color.GREEN).points(pointList);
         }
 
         addMarker();
-
     }
 
 
-    private void addMarker(){
+    private void addMarker() {
+        if (stLatLng != null) {
+            BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ct_map_location_32);
+            OverlayOptions option = new MarkerOptions().position(stLatLng).icon(bitmap);
+            mBaiduMap.addOverlay(option);
+        }
 
-        if(msUpdate != null){
+        if (msUpdate != null) {
             mBaiduMap.setMapStatus(msUpdate);
         }
 
-        if(polyline != null){
+        if (polyline != null) {
             mBaiduMap.addOverlay(polyline);
         }
 
-        if(overlay != null){
+        if (overlay != null) {
             mBaiduMap.addOverlay(overlay);
         }
 
@@ -507,22 +482,22 @@ public class TrackActivity extends BaseActivity {
 
     /**
      * 启动刷新线程
+     *
      * @param isStart
      */
-    private void startRefreshThread(boolean isStart){
+    private void startRefreshThread(boolean isStart) {
 
-        if(refreshThread == null){
+        if (refreshThread == null) {
             refreshThread = new RefreshThread();
         }
 
         refreshThread.refresh = isStart;
 
-        if(isStart){
-            if(!refreshThread.isAlive()){
+        if (isStart) {
+            if (!refreshThread.isAlive()) {
                 refreshThread.start();
             }
-        }
-        else{
+        } else {
             refreshThread = null;
         }
 
@@ -532,11 +507,12 @@ public class TrackActivity extends BaseActivity {
 
     /**
      * 获取手机的Imei码，作为实体对象的标记值
+     *
      * @param context
      * @return
      */
 
-    private String getImei(Context context){
+    private String getImei(Context context) {
         String mImei = "NULL";
         try {
             mImei = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
@@ -548,50 +524,47 @@ public class TrackActivity extends BaseActivity {
     }
 
 
-
-
-
     @Override
-    protected void onStart()
-    {
+    protected void onStart() {
         // 如果要显示位置图标,必须先开启图层定位
         mBaiduMap.setMyLocationEnabled(true);
-        if (!locationClient.isStarted())
-        {
-            locationClient.start();
-        }
+        needdraw=true;
         super.onStart();
+        Log.i("TGATGA", "start");
     }
+
     @Override
-    protected void onStop()
-    {
+
+    protected void onStop() {
         mBaiduMap.setMyLocationEnabled(false);
-        locationClient.stop();
+        Log.i("TGATGA", "stop");
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Log.i("TGATGA", "destroy");
+
         mMapView.onDestroy();
+
+        index = 0;
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        Log.i("TGATGA", "onresume");
         mMapView.onResume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        Log.i("TGATGA", "onpause");
         mMapView.onPause();
     }
 
-    /*获取当前位置测试方法*/
-    public String getNowAddress() {
-        return "中北大学";
-    }
-}
 
+}

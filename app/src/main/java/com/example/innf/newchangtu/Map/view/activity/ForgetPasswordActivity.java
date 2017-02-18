@@ -12,9 +12,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.innf.newchangtu.R;
 import com.example.innf.newchangtu.Map.utils.RegexValidateUtil;
 import com.example.innf.newchangtu.Map.view.base.BaseActivity;
+import com.example.innf.newchangtu.R;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;

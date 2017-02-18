@@ -9,10 +9,14 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
 
+    <string name="one_click_fast_send_fun">功能：请认真选择三个联系人，当遇到危险时，连续点击四下电源键，发送你的位置信息给指定联系人</string>
+    <string name="one_click_fast_send_tips">提示：用户在遇到紧急情况时可以利用该功能求助</string>
+
     <!--主界面字符串-->
     <string name="main_position_report">你当前的位置：%s</string>
     <string name="fast_send">一键发送</string>
     <string name="start_record">开始记录</string>
+    <string name="empty_position">还没有你的位置信息，赶紧开始吧~</string>
     <!---->
 
     <!--登录界面字符串-->
@@ -24,6 +28,7 @@
 
     <!--注册界面字符串-->
     <string name="sign_up_hint_account">用户</string>
+    <string name="sign_up_hint_user_name">姓名</string>
     <string name="sign_up_hint_password">密码</string>
     <string name="sign_up_sign_up">注册</string>
     <string name="default_sign_up">默认注册</string>
@@ -35,6 +40,7 @@
 
     <!--侧滑栏字符串-->
     <string name="drawer_menu_relate_friends">关联亲友</string>
+    <string name="drawer_menu_map_sharing">地图共享</string>
     <string name="drawer_menu_track_record">足迹记录</string>
     <string name="drawer_menu_personal_setting">个人设置</string>
     <string name="drawer_menu_broadcast">播报</string>
@@ -77,6 +83,8 @@
     <string name="fab_exchange_map_normal">普通地图</string>
     <string name="fab_exchange_model_compass">罗盘模式</string>
     <string name="fab_exchange_model_common">一般模式</string>
+    <string name="fab_start_track">开始轨迹</string>
+    <string name="fab_end_track">结束轨迹</string>
     <!---->
 
     <!--账号绑定界面字符串-->
@@ -96,7 +104,7 @@
     <!--开始记录 界面字符串-->
     <string name="start_record_status">当前位置</string>
     <string name="start_record_choose_place">地点选择</string>
-    <string name="start_record_transportation">交通工具</string>
+    <string name="start_record_transportation">出行方式</string>
     <string name="start_record_time_interval">时间间隔</string>
     <string name="start_record_select_contracts">选择联系人</string>
     <string name="start_record_remark">备注信息</string>
@@ -136,8 +144,8 @@
 
 
     <!--播报短信模板-->
-    <string name="broadcast_sms">我现在在 %1$s 的路上。出发时间为 %2$s ，交通工具为 %3$s。我现在的位置为：%4$s。</string>
-    <string name="broadcast_sms_with_remark">我现在在 %1$s 的路上。出发时间为 %2$s ，交通工具为 %3$s。我现在的位置为：%4$s。%5$s</string>
+    <string name="broadcast_sms">我现在的位置为：%1$s。。出发时间为 %2$s ，出行方式为 %3$s。</string>
+    <string name="broadcast_sms_with_remark">我现在的位置为：%1$s出发时间为 %2$s ，出行方式为 %3$s。%4$s。</string>
     <string name="broadcast_sms_without_track">我现在的位置为：%1$s。</string>
     <string name="broadcast_sms_without_track_with_remark">我现在的位置为：%1$s。%2$s</string>
     <string name="broadcast_sms_subject">消息播报</string>

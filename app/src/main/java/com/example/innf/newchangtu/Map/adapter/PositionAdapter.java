@@ -30,6 +30,11 @@ public class PositionAdapter extends RecyclerView.Adapter<PositionAdapter.Positi
         mPositionList = positionList;
     }
 
+    public void setPositionList(List<Position> positionList){
+        mPositionList = positionList;
+        notifyDataSetChanged();
+    }
+
     @Override
     public PositionHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(MyApplication.getContext());
@@ -46,10 +51,6 @@ public class PositionAdapter extends RecyclerView.Adapter<PositionAdapter.Positi
     @Override
     public int getItemCount() {
         return mPositionList.size();
-    }
-
-    public void setPositionList(List<Position> positionList){
-        mPositionList = positionList;
     }
 
     class PositionHolder extends RecyclerView.ViewHolder{

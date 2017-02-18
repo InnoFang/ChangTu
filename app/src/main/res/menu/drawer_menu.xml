@@ -23,17 +23,23 @@
                   android:title="@string/drawer_menu_track_record"
                   android:icon="@drawable/drawer_menu_track_record"/>
 
-            <item android:id="@+id/drawer_menu_bind_on_account"
+            <!--<item android:id="@+id/drawer_menu_bind_on_account"-->
+                  <!--android:checkable="true"-->
+                  <!--android:title="@string/drawer_menu_relate_friends"-->
+                  <!--android:icon="@drawable/relate_friends"-->
+                  <!--/>-->
+            <item android:id="@+id/drawer_menu_map_sharing"
                   android:checkable="true"
-                  android:title="@string/drawer_menu_relate_friends"
-                  android:icon="@drawable/drawer_menu_bind_on_account"
-                  />
+                  android:title="@string/drawer_menu_map_sharing"
+                  android:icon="@drawable/drawer_menu_map_sharing"
+                />
 
             <item android:id="@+id/drawer_menu_personal_setting"
                   android:checkable="true"
                   android:title="@string/drawer_menu_personal_setting"
                   android:icon="@drawable/drawer_menu_personal_setting"
                   />
+
         </menu>
     </item>
 

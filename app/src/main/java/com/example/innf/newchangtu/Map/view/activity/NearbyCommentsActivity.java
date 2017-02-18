@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -21,20 +22,24 @@ import com.example.innf.newchangtu.R;
 
 import java.util.List;
 
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.UpdateListener;
+
 public class NearbyCommentsActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String EXTRA_NEARBY = "nearby";
+    private static final String TAG = "NearbyCommentsActivity";
 
     private Nearby mNearby;
-    private NearbyComments mNearbyComments;
-    private NearbyCommentsAdapter mNearbyCommentsAdapter;
-
     private TextView mNearbyNameTextView;
     private TextView mNearbyContentTextView;
     private TextView mNearbyDateTextView;
     private RecyclerView mNearbyCommentsRecyclerView;
     private EditText mNearbyCommentsAddEditText;
     private ImageView mNearbyCommentsAddImageView;
+    private List<NearbyComments> mNearbyCommentsList;
+    private NearbyCommentsAdapter mNearbyCommentsAdapter;
+    private ImageView mEmptyView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,8 @@ public class NearbyCommentsActivity extends BaseActivity implements View.OnClick
 
         mNearby = (Nearby) getIntent().getSerializableExtra(EXTRA_NEARBY);
 //        mNearbyComments = mNearby.getNearbyComments();
+        mNearbyCommentsList = mNearby.getNearbyCommentsList();
+        NearbyCommentsLab.get(this).setNearbyCommentsList(mNearbyCommentsList);
         Toolbar toolbar = (Toolbar) findViewById(R.id.action_toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -51,6 +58,7 @@ public class NearbyCommentsActivity extends BaseActivity implements View.OnClick
         }
 
 
+        mEmptyView = (ImageView) findViewById(R.id.empty_view);
         mNearbyNameTextView = (TextView) findViewById(R.id.nearby_name_text_view);
         mNearbyContentTextView = (TextView) findViewById(R.id.nearby_content_text_view);
         mNearbyDateTextView = (TextView) findViewById(R.id.nearby_date_text_view);
@@ -62,6 +70,7 @@ public class NearbyCommentsActivity extends BaseActivity implements View.OnClick
         mNearbyCommentsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         updateUI();
+        showEmptyView(mNearbyCommentsList.isEmpty());
     }
 
     private void updateUI() {
@@ -72,9 +81,13 @@ public class NearbyCommentsActivity extends BaseActivity implements View.OnClick
         NearbyCommentsLab nearbyCommentsLab = NearbyCommentsLab.get(this);
         List<NearbyComments> nearbyCommentsList = nearbyCommentsLab.getNearbyCommentsList();
 
-
-        mNearbyCommentsAdapter = new NearbyCommentsAdapter(nearbyCommentsList);
-        mNearbyCommentsRecyclerView.setAdapter(mNearbyCommentsAdapter);
+        if (null == mNearbyCommentsAdapter){
+            mNearbyCommentsAdapter = new NearbyCommentsAdapter(nearbyCommentsList);
+            mNearbyCommentsRecyclerView.setAdapter(mNearbyCommentsAdapter);
+        } else {
+            mNearbyCommentsAdapter.setNearbyCommentsList(mNearbyCommentsList);
+            mNearbyCommentsAdapter.notifyDataSetChanged();
+        }
 
     }
 
@@ -92,9 +105,42 @@ public class NearbyCommentsActivity extends BaseActivity implements View.OnClick
                 if (comments.equals("")) {
                     showToast("评论为空");
                 } else {
-                    showToast(comments);
+                    NearbyComments nearbyComments = new NearbyComments();
+                    nearbyComments.setContent(comments);
+                    mNearbyCommentsList.add(nearbyComments);
+                    NearbyCommentsLab.get(this).setNearbyCommentsList(mNearbyCommentsList);
+                    updateNearby(mNearby);
+                    updateUI();
+                    showEmptyView(false);
+                    mNearbyCommentsAddEditText.setText("");
                 }
                 break;
+        }
+    }
+
+    private void updateNearby(Nearby nearby) {
+        nearby.update(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null) {
+                    showToast("发表成功");
+                    Log.i(TAG, "发表成功");
+                } else {
+                    showToast(e.getMessage());
+                    Log.i(TAG, e.getMessage());
+                }
+            }
+        });
+    }
+
+
+    private void showEmptyView(boolean b) {
+        if (b){
+            mEmptyView.setVisibility(View.VISIBLE);
+            mNearbyCommentsRecyclerView.setVisibility(View.INVISIBLE);
+        } else {
+            mEmptyView.setVisibility(View.GONE);
+            mNearbyCommentsRecyclerView.setVisibility(View.VISIBLE);
         }
     }
 }

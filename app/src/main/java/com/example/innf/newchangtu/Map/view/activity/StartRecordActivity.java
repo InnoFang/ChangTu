@@ -29,7 +29,6 @@ import android.widget.RadioGroup;
 
 import com.example.innf.newchangtu.Map.bean.Track;
 import com.example.innf.newchangtu.Map.model.TrackLab;
-import com.example.innf.newchangtu.Map.utils.AddressInitTask;
 import com.example.innf.newchangtu.Map.view.base.BaseActivity;
 import com.example.innf.newchangtu.R;
 
@@ -42,7 +41,6 @@ public class StartRecordActivity extends BaseActivity implements View.OnClickLis
     private static final String TAG = "StartRecordActivity";
 
     private static final String DEFAULT_BUTTON_TEXT = "请选择";
-    private static final String DEFAULT_EDIT_TEXT_TEXT = "请填写";
     public static final String EXTRA_TRACK = "com.example.innf.changtu.view.activity.track";
     public static final String EXTRA_TIME_INTERVAL = "com.example.innf.changtu.view.activity.time_interval";
     public static final String EXTRA_START = "com.example.innf.changtu.view.activity.start";
@@ -52,8 +50,7 @@ public class StartRecordActivity extends BaseActivity implements View.OnClickLis
     private static final int REQUEST_CONTACT = 1;
 
     private Button mStartPositionButton;/*区域选择：出发地区域选择*/
-    private Button mChooseAreaButton;/*区域选择：目的地区域选择*/
-    private EditText mChoosePlaceEditText;/*地址名选择：目的地地址名选择*/
+//    private Button mChooseAreaButton;/*区域选择：目的地区域选择*/
     private Button mSelectTransportationButton;/*乘车类型选择*/
     private RadioGroup mTimeIntervalRadioGroup;/*时间间隔选择*/
     private LinearLayout mTimeIntervalLinearLayout;/*自定义事件间隔布局*/
@@ -61,8 +58,10 @@ public class StartRecordActivity extends BaseActivity implements View.OnClickLis
     private EditText mRemarkEditText;/*备注信息*/
     private EditText mTimeIntervalOtherEditText;/*自定义时间间隔*/
 
-    private int mTimeInterval = 10;/*默认时间间隔*/
-    private String phone;/*保存联系人手机号码*/
+    private int mTimeInterval = 5;/*默认时间间隔*/
+    private String mPhone;/*保存联系人手机号码*/
+    private String mStartPosition;
+    private Track mTrack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,12 +74,8 @@ public class StartRecordActivity extends BaseActivity implements View.OnClickLis
         if (null != actionBar){
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
-        String startPosition = getIntent().getStringExtra(EXTRA_START_POSITION);
-
         mStartPositionButton = (Button) findViewById(R.id.start_position_button);
-        mChooseAreaButton = (Button) findViewById(R.id.choose_area_button);
-        mChoosePlaceEditText = (EditText) findViewById(R.id.choose_place_edit_text);
+//        mChooseAreaButton = (Button) findViewById(R.id.choose_area_button);
         mSelectTransportationButton = (Button) findViewById(R.id.select_transportation_button);
         mTimeIntervalRadioGroup = (RadioGroup) findViewById(R.id.time_interval_radio_group);
         mTimeIntervalLinearLayout = (LinearLayout) findViewById(R.id.time_interval_other_linear_layout);
@@ -88,20 +83,52 @@ public class StartRecordActivity extends BaseActivity implements View.OnClickLis
         mSelectContractsButton = (Button) findViewById(R.id.select_contracts_button);
         mRemarkEditText = (EditText) findViewById(R.id.remark_edit_text);
 
-        mStartPositionButton.setText(startPosition);
-        mChooseAreaButton.setOnClickListener(this);
+        mTrack = (Track) getIntent().getSerializableExtra(EXTRA_TRACK);
+
+        if (mTrack == null){
+            mStartPosition = getIntent().getStringExtra(EXTRA_START_POSITION);
+        } else {
+            mStartPosition = mTrack.getStartPosition();
+            mTimeInterval = getIntent().getIntExtra(EXTRA_TIME_INTERVAL, 5);
+            setTimeInterval(mTimeInterval);    /*如果有时间间隔信息，这对“时间间隔”区域情况赋值*/
+            mSelectTransportationButton.setText(mTrack.getTransportation());
+            mRemarkEditText.setText(mTrack.getRemark());
+            mSelectContractsButton.setText(mTrack.getContracts());
+            mPhone = mTrack.getPhone();
+        }
+
+        mStartPositionButton.setText(mStartPosition);
+//        mChooseAreaButton.setOnClickListener(this);
         mSelectTransportationButton.setOnClickListener(this);
         mSelectContractsButton.setOnClickListener(this);
         mTimeIntervalRadioGroup.setOnCheckedChangeListener(this);
+    }
+
+    private void setTimeInterval(int timeInterval) {
+        switch (timeInterval){
+            case 5:
+                onCheckedChanged(mTimeIntervalRadioGroup, R.id.time_interval_ten_radio_button);
+                break;
+            case 10:
+                onCheckedChanged(mTimeIntervalRadioGroup, R.id.time_interval_thirty_radio_button);
+                break;
+            case 15:
+                onCheckedChanged(mTimeIntervalRadioGroup, R.id.time_interval_sixty_radio_button);
+                break;
+            default:
+                onCheckedChanged(mTimeIntervalRadioGroup, R.id.time_interval_other_radio_button);
+                mTimeIntervalOtherEditText.setText(timeInterval + "");
+                break;
+        }
     }
 
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.choose_area_button:
-                new AddressInitTask(this, mChooseAreaButton).execute("山西", "太原", "尖草坪区");
-                break;
+//            case R.id.choose_area_button:
+//                new AddressInitTask(this, mChooseAreaButton).execute("山西", "太原", "尖草坪区");
+//                break;
             case R.id.select_transportation_button:
                 showSelectTransportationDialog();
                 break;
@@ -116,14 +143,6 @@ public class StartRecordActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        switch (requestCode){
-//            case REQUEST_CODE:
-//                Log.d(TAG, "onActivityResult: is called");
-//                if (resultCode == Activity.RESULT_OK){
-//                    String contracts = data.getStringExtra(RelateFriendsActivity.EXTRA_KEY_CONTRACTS_STRING);
-//                }
-//                break;
-//        }
         if (resultCode != Activity.RESULT_OK){
             return;
         }
@@ -140,9 +159,9 @@ public class StartRecordActivity extends BaseActivity implements View.OnClickLis
                 String contract = c.getString(0);  /*获取第0列数据, 即手机联系人名字*/
                 String phoneNumber = c.getString(1);
                 Log.d(TAG, phoneNumber);
-                phone = c.getString(1);    /*获取第1列数据，即手机联系人手机号码*/
-                phone = phone.replace("-", "");
-                phone = phone.replace(" ", "");
+                mPhone = c.getString(1);    /*获取第1列数据，即手机联系人手机号码*/
+                mPhone = mPhone.replace("-", "");
+                mPhone = mPhone.replace(" ", "");
                 mSelectContractsButton.setText(contract);
             }finally {
                 c.close();
@@ -151,9 +170,14 @@ public class StartRecordActivity extends BaseActivity implements View.OnClickLis
         }
     }
 
-    public static Intent newIntent(Context context, String startPosition){
+    public static Intent newIntent(Context context, String startPosition, Track track, int timeInterval, String phone){
         Intent intent = new Intent(context, StartRecordActivity.class);
         intent.putExtra(EXTRA_START_POSITION, startPosition);
+        if (track != null){
+            intent.putExtra(EXTRA_TRACK, track);
+            intent.putExtra(EXTRA_TIME_INTERVAL, timeInterval);
+            intent.putExtra(EXTRA_PHONE, phone);
+        }
         return intent;
     }
 
@@ -164,58 +188,85 @@ public class StartRecordActivity extends BaseActivity implements View.OnClickLis
         return super.onCreateOptionsMenu(menu);
     }
 
-    /******************************/
-    /*缺少关联联系人！！！！！！！！*/
-    /******************************/
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.menu_start_record:
-                if (!isRecordEmpty()){
-                    final ProgressDialog progressDialog = new ProgressDialog(this);
-                    progressDialog.show();
-                    final Track track = new Track();
-                    final String startPosition = mStartPositionButton.getText().toString();
-                    track.setStartPosition(startPosition);
-                    String endPlace = mChoosePlaceEditText.getText().toString();
-                    final String endPosition = mChooseAreaButton.getText().toString() + endPlace;
-                    track.setEndPosition(endPosition);
-                    String transportation = mSelectTransportationButton.getText().toString();
-                    track.setTransportation(transportation);
-                    track.setTakeTime("2小时15分钟");
-                    track.setDistance("19公里");
-                    String remark = mRemarkEditText.getText().toString();
-                    track.setRemark(remark);
-                    TrackLab.get(this).addTrack(track);
-                    track.save(new SaveListener<String>() {
-                        @Override
-                        public void done(String s, BmobException e) {
-                            if (null == e){
-                                track.setObjectId(s);
-                                track.update(new UpdateListener() {
-                                    @Override
-                                    public void done(BmobException e) {
-                                        if (null == e){
-                                            progressDialog.cancel();
-                                            sendResult(track, startPosition, endPosition);
+                if (mTrack == null && !isRecordEmpty()){
+                    createTrack();    /*创建Track*/
+                } else {
+                  AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setMessage("你想新建一个行程记录吗？")
+                            .setPositiveButton("不了，我想继续", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    mTrack.update(new UpdateListener() {
+                                        @Override
+                                        public void done(BmobException e) {
+                                            if (null == e){
+                                                Log.i(TAG, "track 更新成功");
+                                            } else {
+                                                Log.i(TAG, e.getMessage());
+                                            }
                                             finish();
-                                            showToast("创建成功");
-                                        } else {
-                                            showToast("创建失败");
                                         }
-                                    }
-                                });
-                                showToast("开始记录");
-                            }else{
-                                showToast(e.getMessage());
-                            }
-                        }
-                    });
+                                    }) ;
+                                }
+
+                            })
+                            .setNegativeButton("新建一个吧", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    createTrack();
+                                }
+                            })
+                            .show();
                 }
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void createTrack() {
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.show();
+        final Track track = new Track();
+        final String startPosition = mStartPositionButton.getText().toString();
+        track.setStartPosition(startPosition);
+        String transportation = mSelectTransportationButton.getText().toString();
+        track.setTransportation(transportation);
+        String remark = mRemarkEditText.getText().toString();
+        track.setRemark(remark);
+        String contracts = mSelectContractsButton.getText().toString();
+        track.setContracts(contracts);
+        track.setPhone(mPhone);
+        track.setTimeInterval(mTimeInterval);
+        TrackLab.get(this).addTrack(track);
+        track.save(new SaveListener<String>() {
+            @Override
+            public void done(String s, BmobException e) {
+                if (null == e){
+                    track.setObjectId(s);
+                    track.update(new UpdateListener() {
+                        @Override
+                        public void done(BmobException e) {
+                            progressDialog.cancel();
+                            if (null == e){
+                                sendResult(track, startPosition);
+                                showToast("创建成功,开始记录");
+                                finish();
+                            } else {
+                                showToast("创建失败");
+                                Log.i(TAG, e.getMessage());
+                            }
+                        }
+                    });
+                }else{
+                    showToast(e.getMessage());
+                    Log.i(TAG, e.getMessage());
+                }
+            }
+        });
     }
 
     @Override
@@ -223,15 +274,15 @@ public class StartRecordActivity extends BaseActivity implements View.OnClickLis
         switch (i){
             case R.id.time_interval_ten_radio_button:
                 showOtherTimeIntervalLayout(false);
-                mTimeInterval = 10;
+                mTimeInterval = 5;
                 break;
             case R.id.time_interval_thirty_radio_button:
                 showOtherTimeIntervalLayout(false);
-                mTimeInterval = 30;
+                mTimeInterval = 10;
                 break;
             case R.id.time_interval_sixty_radio_button:
                 showOtherTimeIntervalLayout(false);
-                mTimeInterval = 60;
+                mTimeInterval = 15;
                 break;
             case R.id.time_interval_other_radio_button:
                 showOtherTimeIntervalLayout(true);
@@ -285,14 +336,10 @@ public class StartRecordActivity extends BaseActivity implements View.OnClickLis
     }
 
     public boolean isRecordEmpty(){
-        if (mChooseAreaButton.getText().toString().equals(DEFAULT_BUTTON_TEXT)){
-            showToast("请选择地点区域");
-            return true;
-        }
-        if (mChoosePlaceEditText.getText().toString().equals(DEFAULT_EDIT_TEXT_TEXT)){
-            showToast("请填写地点名");
-            return true;
-        }
+//        if (mChooseAreaButton.getText().toString().equals(DEFAULT_BUTTON_TEXT)){
+//            showToast("请选择地点区域");
+//            return true;
+//        }
         if (mSelectTransportationButton.getText().toString().equals(DEFAULT_BUTTON_TEXT)){
             showToast("请选择交通工具");
             return true;
@@ -304,7 +351,7 @@ public class StartRecordActivity extends BaseActivity implements View.OnClickLis
         return false;
     }
 
-    private void sendResult(Track track, String start, String end){
+    private void sendResult(Track track, String start){
         Intent data = new Intent();
         data.putExtra(EXTRA_TRACK, track);
         String otherTimeInterval = mTimeIntervalOtherEditText.getText().toString();
@@ -313,8 +360,7 @@ public class StartRecordActivity extends BaseActivity implements View.OnClickLis
         }
         data.putExtra(EXTRA_TIME_INTERVAL, mTimeInterval);
         data.putExtra(EXTRA_START, start);
-        data.putExtra(EXTRA_END, end);
-        data.putExtra(EXTRA_PHONE, phone);
+        data.putExtra(EXTRA_PHONE, mPhone);
         setResult(Activity.RESULT_OK, data);
     }
 }

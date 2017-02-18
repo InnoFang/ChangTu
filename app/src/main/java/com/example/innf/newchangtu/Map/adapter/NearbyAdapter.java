@@ -94,14 +94,12 @@ public class NearbyAdapter extends RecyclerView.Adapter<NearbyAdapter.NearbyHold
 
         public TextView mNameTextView;
         private TextView mContentTextView;
-        private TextView mCommentsNumberTextView;
         private TextView mDateTextView;
 
         public NearbyHolder(View itemView) {
             super(itemView);
             mNameTextView = (TextView) itemView.findViewById(R.id.item_author);
             mContentTextView = (TextView) itemView.findViewById(R.id.item_content);
-            mCommentsNumberTextView = (TextView) itemView.findViewById(R.id.item_comments);
             mDateTextView = (TextView) itemView.findViewById(R.id.item_date);
         }
 
@@ -110,7 +108,6 @@ public class NearbyAdapter extends RecyclerView.Adapter<NearbyAdapter.NearbyHold
             mNameTextView.setText(mNearby.getName());
             mDateTextView.setText(mNearby.getDate());
             mContentTextView.setText(mNearby.getContent());
-            mCommentsNumberTextView.setText(mNearby.getCommentsNumber());
         }
     }
 

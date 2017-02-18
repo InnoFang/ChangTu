@@ -21,6 +21,8 @@
             android:singleLine="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:hint="@string/log_in_hint_account"
             android:textSize="20sp" />
     </android.support.design.widget.TextInputLayout>
@@ -37,9 +39,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/log_in_hint_password"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:inputType="textPassword"
             android:textSize="20sp" />
     </android.support.design.widget.TextInputLayout>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -52,8 +57,8 @@
         <Button
             android:layout_width="match_parent"
             android:id="@+id/log_in_button"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
             android:background="@drawable/log_in_button_background"
             android:layout_gravity="center"
             android:layout_height="wrap_content"

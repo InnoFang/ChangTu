@@ -8,15 +8,15 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-
     <style name="DemoTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">#38A4DE</item>
         <item name="colorPrimaryDark">#1B88CA</item>
         <item name="colorAccent">#1B88CA</item>
     </style>
 
+
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/changtu_spalsh</item>
+        <item name="android:windowBackground">@drawable/changtu_splash</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
     </style>

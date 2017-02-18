@@ -21,9 +21,13 @@ public class NearbyCommentsLab {
         return mNearbyCommentsList;
     }
 
-    public NearbyCommentsLab(Context context) {
+    public void setNearbyCommentsList(List<NearbyComments> nearbyCommentsList) {
+        mNearbyCommentsList = nearbyCommentsList;
+    }
+
+    private NearbyCommentsLab(Context context) {
         mNearbyCommentsList = new ArrayList<>();
-        testList();
+//        testList();
     }
 
     public static NearbyCommentsLab get(Context context){

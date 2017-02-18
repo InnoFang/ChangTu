@@ -9,7 +9,7 @@
 
     <stroke
         android:width="2dp"
-        android:color="#e0aa21" /> <!-- 定义描边的宽度和描边的颜色值 -->
+        android:color="#618db9" /> <!-- 定义描边的宽度和描边的颜色值 -->
     <solid
-        android:color="#f1d6b0"/>
+        android:color="#f0ddc4"/>
 </shape>

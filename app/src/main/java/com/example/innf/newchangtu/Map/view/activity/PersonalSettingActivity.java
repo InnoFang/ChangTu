@@ -141,9 +141,9 @@ public class PersonalSettingActivity extends BaseActivity implements View.OnClic
                         }
                     }
 
+                    }
                 }
-            }
-        });
+            });
         mSwipeRefreshLayout.setRefreshing(false);
     }
 

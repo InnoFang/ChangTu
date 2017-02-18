@@ -1,5 +1,6 @@
 package com.example.innf.newchangtu.Map.view.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -35,15 +36,16 @@ import com.example.innf.newchangtu.R;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 public class RelateFriendsActivity extends BaseActivity {
     private static final String TAG = "RelateFriendsActivity";
-    public static final String EXTRA_KEY_CONTRACTS_STRING = "com.example.innf.changtu.view.activity.contracts";
-    private static final int REQUEST_CONTACT = 0;
-    private static final int REFRESH_COMPLETE = 1;
+    public static final String EXTRA_CONTRACTS = "com.example.innf.changtu.view.activity.contracts";
+    private static final int REFRESH_COMPLETE = 0;
 
     private RecyclerView mRelateFriendsRecyclerView;
     private TextView mEmptyTextView;
@@ -51,16 +53,20 @@ public class RelateFriendsActivity extends BaseActivity {
 
     private ContractsAdapter mContractsAdapter;
 
+    private User mUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_relate_friends);
 
+        mUser = BmobUser.getCurrentUser(User.class);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.action_toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (null != actionBar) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(false);
         }
 
         mRelateFriendsRecyclerView = (RecyclerView) findViewById(R.id.relate_friends_recycler_view);
@@ -103,11 +109,87 @@ public class RelateFriendsActivity extends BaseActivity {
         mContractsAdapter.setOnItemClickListener(new ContractsAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, Contracts contracts) {
-                Intent intent = ShareMapActivity.newIntent(RelateFriendsActivity.this, contracts);
-                startActivity(intent);
+                operateContracts(contracts);
             }
         });
     }
+
+    @SuppressWarnings("deprecation")
+    private void operateContracts(final Contracts contracts) {
+        String[] rideType = {
+                "删除联系人", "共享位置"
+        };
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this, android.R.layout.simple_list_item_1, rideType
+        );
+        View view1 = View.inflate(this, R.layout.show_dialog, null);
+        final ListView listView = (ListView) view1.findViewById(R.id.dialog_list_view);
+        listView.setAdapter(adapter);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog dialog = builder.setTitle("关联亲友")
+                .setView(view1)
+                .setPositiveButton("关闭", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                }).show();
+        WindowManager manager = getWindowManager();
+        Display display = manager.getDefaultDisplay();
+        int width = display.getWidth();
+        int height = display.getHeight();
+        dialog.getWindow().setLayout(width * 4 / 5, height * 2 / 5);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 0) {
+                    deleteContracts(contracts);
+                } else if (i == 1) {
+                    returnContracts(contracts);
+                }
+                dialog.dismiss();
+            }
+        });
+    }
+
+    private void returnContracts(Contracts contracts) {
+        sendContracts(contracts);
+        finish();
+    }
+
+    private void sendContracts(Contracts contracts) {
+        Intent data = new Intent();
+        data.putExtra(EXTRA_CONTRACTS, contracts);
+        setResult(Activity.RESULT_OK, data);
+    }
+
+    private void deleteContracts(final Contracts contracts) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog dialog = builder.setTitle("你确定删除该联系人吗？")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        contracts.delete(new UpdateListener() {
+                            @Override
+                            public void done(BmobException e) {
+                                if (null == e) {
+                                    showToast("删除成功");
+                                } else {
+                                    showToast("删除失败");
+                                }
+                            }
+                        });
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                })
+                .show();
+    }
+
 
     private void queryContracts() {
         showEmptyView(false);
@@ -174,14 +256,14 @@ public class RelateFriendsActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add_contracts:
-                chooseRelateFriendsWay();
+                chooseRelateContractsWay();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("deprecation")/*消除过时方法警告*/
-    public void chooseRelateFriendsWay() {
+    public void chooseRelateContractsWay() {
         String[] rideType = {
                 "手机号", "畅途用户名"
         };
@@ -210,7 +292,7 @@ public class RelateFriendsActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i == 0) {
                     relateCTUserByPhone();
-                } else if (i == 1){
+                } else if (i == 1) {
                     relateCTUserByName();
                 }
                 dialog.dismiss();
@@ -240,7 +322,7 @@ public class RelateFriendsActivity extends BaseActivity {
                 .show();
     }
 
-    public void relateCTUserByName(){
+    public void relateCTUserByName() {
         BmobQuery<User> query = new BmobQuery<>();
         final EditText editText = new EditText(this);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -268,42 +350,49 @@ public class RelateFriendsActivity extends BaseActivity {
         query.findObjects(new FindListener<User>() {
             @Override
             public void done(List<User> list, BmobException e) {
-                if (null == e){
+                if (null == e) {
                     User user = list.get(0);
-                    Contracts contracts = new Contracts();
+                    final Contracts contracts = new Contracts();
+                    contracts.setContractUser(user);
                     contracts.setName(user.getName());
                     contracts.setPhoneNumber(user.getMobilePhoneNumber());
+                    contracts.setShareConnect((Boolean) user.getObjectByKey("mIsShare"));
                     ContractsLab contractsLab = ContractsLab.get(RelateFriendsActivity.this);
                     contractsLab.addContracts(contracts);
                     contracts.save(new SaveListener<String>() {
                         @Override
                         public void done(String s, BmobException e) {
-                            if (null == e){
+                            if (null == e) {
                                 showToast("添加成功");
-                            }else{
+                            } else {
+
                                 showToast(e.getMessage());
                             }
                         }
                     });
                     updateUI();
-                }else{
+                } else {
                     showToast(e.getMessage());
                 }
             }
         });
     }
 
-    public void queryCTUserByName(String username){
+    public void queryCTUserByName(String username) {
         BmobQuery<User> query = new BmobQuery<>();
         query.addWhereEqualTo("username", username);
         query.findObjects(new FindListener<User>() {
             @Override
             public void done(List<User> list, BmobException e) {
-                if (null == e){
+                if (null == e) {
                     User user = list.get(0);
-                    Contracts contracts = new Contracts();
+                    final Contracts contracts = new Contracts();
+                    Log.i(TAG, "done: use.name = " + user.getUsername());
+//                        Log.i("relate", "relate : " + (String) user.getObjectByKey("name"));
+                    contracts.setContractUser(user);
                     contracts.setName(user.getUsername());
                     contracts.setPhoneNumber(user.getMobilePhoneNumber());
+                    contracts.setShareConnect((Boolean) user.getObjectByKey("mIsShare"));
                     ContractsLab contractsLab = ContractsLab.get(RelateFriendsActivity.this);
                     contractsLab.addContracts(contracts);
                     contracts.save(new SaveListener<String>() {
@@ -317,10 +406,11 @@ public class RelateFriendsActivity extends BaseActivity {
                         }
                     });
                     updateUI();
-                }else {
+                } else {
                     showToast(e.getMessage());
                 }
             }
         });
+
     }
 }

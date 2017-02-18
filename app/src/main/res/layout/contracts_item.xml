@@ -1,37 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
-    android:orientation="vertical"
->
+    android:layout_margin="5dp"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="#c6daee"
+    app:cardCornerRadius="6dp"
+    >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/contracts_name_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="10dp"
-            android:textColor="#000000"
-            android:textSize="25sp"
-            tools:text="Inno"/>
+                <TextView
+                    android:id="@+id/contracts_name_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#888c4f"
+                    android:textSize="25sp"
+                    tools:text="Inno"/>
 
-        <TextView
-            android:id="@+id/contracts_phone_number_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:textSize="16sp"
-            android:textColor="#95bfef"
-            android:layout_marginBottom="10dp"
-            tools:text="13326889954"
-            />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/colorPrimary"
-            />
-</LinearLayout>
+                <TextView
+                    android:id="@+id/contracts_phone_number_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="16dp"
+                    android:textColor="#51b851"
+                    android:textSize="16sp"
+                    tools:text="13326889954"
+                    />
+            </LinearLayout>
+           <Button
+               android:id="@+id/share_map_connect_view"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:gravity="center_vertical"
+               android:layout_marginRight="20dp"
+               android:layout_centerVertical="true"
+               android:layout_alignParentEnd="true"
+               android:layout_marginEnd="18dp"
+               android:background="@drawable/button_unclick_background"
+               android:drawableLeft="@drawable/drawer_menu_map_sharing"
+               android:text="正在共享"
+               android:textColor="#FFC6DAEE"
+               android:clickable="false"
+               android:visibility="invisible"
+               />
+        </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>

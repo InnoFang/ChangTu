@@ -2,7 +2,9 @@ package com.example.innf.newchangtu.Map.bean;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import cn.bmob.v3.BmobObject;
 
@@ -17,23 +19,19 @@ public class Nearby extends BmobObject implements Serializable{
     private String mName;
     private String mAddress;
     private Date mDate;
-
-    private String mCommentsNumber;
+    private List<NearbyComments> mNearbyCommentsList;
 
     public Nearby(){
         mDate = new Date();
+        mNearbyCommentsList = new ArrayList<>();
+    }
+
+    public List<NearbyComments> getNearbyCommentsList() {
+        return mNearbyCommentsList;
     }
 
     public String getDate() {
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss ").format(mDate);
-    }
-
-    public void setCommentsNumber(String commentsNumber) {
-        mCommentsNumber = commentsNumber;
-    }
-
-    public String getCommentsNumber() {
-        return mCommentsNumber;
     }
 
     public void setAddress(String address) {

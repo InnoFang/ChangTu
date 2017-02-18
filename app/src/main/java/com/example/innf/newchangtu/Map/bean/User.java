@@ -1,5 +1,7 @@
 package com.example.innf.newchangtu.Map.bean;
 
+import java.io.Serializable;
+
 import cn.bmob.v3.BmobUser;
 
 /**
@@ -8,13 +10,99 @@ import cn.bmob.v3.BmobUser;
  * Description: 畅途用户模型层
  */
 
-public class User extends BmobUser {
+public class User extends BmobUser implements Serializable{
 
     private String name;
     private Integer age;
     private String address;
     private String gender;
 
+    private double mLatitude;
+    private double mLongitude;
+
+    private boolean mIsShare;
+
+    public boolean isShare() {
+        return mIsShare;
+    }
+
+    public void setShare(boolean share) {
+        mIsShare = share;
+    }
+
+    public double getLatitude() {
+        return mLatitude;
+    }
+
+    public double getLongitude() {
+        return mLongitude;
+    }
+
+    public void setLatitude(double latitude) {
+        mLatitude = latitude;
+    }
+
+    public void setLongitude(double longitude) {
+        mLongitude = longitude;
+    }
+
+    /******紧急联系人一，二，三*******/
+    private String mFirstContractName;
+    private String mSecondContractName;
+    private String mThirdContractName;
+
+    private String mFirstContractPhone;
+    private String mSecondContractPhone;
+    private String mThirdContractPhone;
+    /********************************/
+
+    public String getFirstContractName() {
+        return mFirstContractName;
+    }
+
+    public String getSecondContractName() {
+        return mSecondContractName;
+    }
+
+    public String getThirdContractName() {
+        return mThirdContractName;
+    }
+
+    public String getSecondContractPhone() {
+        return mSecondContractPhone;
+    }
+
+    public String getFirstContractPhone() {
+        return mFirstContractPhone;
+    }
+
+    public String getThirdContractPhone() {
+        return mThirdContractPhone;
+    }
+
+    public void setFirstContractName(String firstContractName) {
+        mFirstContractName = firstContractName;
+    }
+
+    public void setSecondContractName(String secondContractName) {
+        mSecondContractName = secondContractName;
+    }
+
+    public void setThirdContractName(String thirdContractName) {
+        mThirdContractName = thirdContractName;
+    }
+
+    public void setFirstContractPhone(String firstContractPhone) {
+        mFirstContractPhone = firstContractPhone;
+    }
+
+    public void setSecondContractPhone(String secondContractPhone) {
+        mSecondContractPhone = secondContractPhone;
+    }
+
+    public void setThirdContractPhone(String thirdContractPhone) {
+        mThirdContractPhone = thirdContractPhone;
+    }
 
     public void setAge(Integer age) {
         this.age = age;

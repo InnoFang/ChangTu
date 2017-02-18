@@ -27,7 +27,6 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.TrackHolder>
     private List<Track> mTrackList;
     private OnItemClickListener mOnItemClickListener;
 
-
     /*clear data list*/
     public void clear(){
         mTrackList.clear();

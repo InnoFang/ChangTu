@@ -28,6 +28,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="16dp"
                 android:gravity="start"
+                android:layout_marginRight="40dp"
                 android:orientation="vertical"
                 >
 
@@ -52,7 +53,7 @@
                         style="@style/track_record_style"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="乘车类型："
+                        android:text="出行方式："
                         />
 
                     <TextView
@@ -110,10 +111,10 @@
                         style="@style/track_record_style"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="全程用时："/>
+                        android:text="结束时间："/>
 
                     <TextView
-                        android:id="@+id/track_take_time_text_view"
+                        android:id="@+id/track_take_end_date_text_view"
                         style="@style/track_record_style"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -183,6 +184,6 @@
         app:layout_anchor="@id/app_bar_layout"
         app:layout_anchorGravity="bottom|end"
         app:fab_size="normal"
-        app:elevation="1dp"/>
+        app:elevation="5dp"/>
 
 </android.support.design.widget.CoordinatorLayout>

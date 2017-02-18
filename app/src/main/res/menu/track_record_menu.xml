@@ -3,10 +3,9 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/relate_friends"
-        android:icon="@drawable/relate_friends"
-        android:title="关联联系人"
+        android:id="@+id/delete_track_record"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:title="删除记录"
         app:showAsAction="ifRoom"
         />
-
 </menu>

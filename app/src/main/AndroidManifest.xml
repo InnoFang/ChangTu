@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.example.innf.newchangtu">
 
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+
     <!-- 这个权限用于进行网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <!-- 这个权限用于访问GPS定位 -->
@@ -101,8 +103,8 @@
 
     <application
         android:name=".Map.utils.MyApplication"
-        android:hardwareAccelerated="false"
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
@@ -111,7 +113,8 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="qKYVzpFU0wlmuCAMlNBNkD5cc4nrmGRH"/>
 
-        <activity android:name=".Map.view.activity.SplashActivity"
+        <activity
+            android:name=".Map.view.activity.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -155,11 +158,9 @@
         </activity>
         <activity
             android:name=".Map.view.activity.RelateFriendsActivity"
-            android:parentActivityName=".Map.view.activity.MainActivity">
+            android:theme="@style/Theme.AppCompat.Light.Dialog">
         </activity>
-        <activity
-            android:name=".Map.view.activity.TrackRecordActivity"
-            android:parentActivityName=".Map.view.activity.TrackRecordListActivity">
+        <activity android:name=".Map.view.activity.TrackRecordActivity">
         </activity>
         <activity
             android:name=".Map.view.activity.NearbyCommentsActivity"
@@ -179,26 +180,40 @@
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote">
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v2.2">
+                </action>
+            </intent-filter>
         </service>
+        <!-- <service -->
+        <!-- android:name="com.baidu.location.f" -->
+        <!-- android:enabled="true" -->
+        <!-- android:process=":remote"> -->
+        <!-- </service> -->
         <service
             android:name="com.baidu.trace.LBSTraceService"
             android:enabled="true"
             android:exported="true">
         </service>
 
-        <activity android:name=".Map.view.activity.OneClickFastSendActivity">
+        <activity android:name=".Map.view.activity.SetEmergencyContractsActivity"
+            android:parentActivityName=".Map.view.activity.OneClickFastSendActivity">
         </activity>
 
         <receiver android:name=".Map.ChangtuThreeReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.SCREEN_OFF"></action>
-                <action android:name="android.intent.action.SCREEN_ON"></action>
-                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"></action>
+                <action android:name="android.intent.action.SCREEN_OFF"/>
+                <action android:name="android.intent.action.SCREEN_ON"/>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED">
                 </action>
-                <action android:name="android.intent.action.ACTION_SHUTDOWN"></action>
+                <action android:name="android.intent.action.ACTION_SHUTDOWN"/>
             </intent-filter>
         </receiver>
+
+        <activity android:name=".Map.view.activity.OneClickFastSendActivity"
+            android:parentActivityName=".Map.view.activity.MainActivity">
+        </activity>
     </application>
 
 </manifest>

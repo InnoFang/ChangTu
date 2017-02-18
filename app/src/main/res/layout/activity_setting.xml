@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.activity.SettingActivity">
-
+>
     <android.support.v7.widget.Toolbar
         android:id="@+id/action_toolbar"
         android:layout_width="match_parent"

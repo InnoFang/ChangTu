@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "com.example.innf.newchangtu"
         minSdkVersion 21
-        targetSdkVersion 24
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -46,7 +46,7 @@ dependencies {
     compile 'com.alibaba:fastjson:1.1.46.android'
     compile 'cn.qqtheme.framework:WheelPicker:latest.release'
     compile 'com.kyleduo.switchbutton:library:1.4.4'
-    compile files('libs/locSDK_6.13.jar')
+
     compile files('libs/gson-2.2.1.jar')
     compile files('libs/androidasync-2.1.6.jar')
     compile files('libs/okhttp-3.2.0.jar')

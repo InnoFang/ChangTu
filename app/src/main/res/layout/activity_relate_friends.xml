@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.activity.TrackRecordListActivity">
+    android:background="@color/white"
+    >
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/action_toolbar"
@@ -16,7 +17,6 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/Toolbar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:navigationIcon="@drawable/ic_back"
         app:title="@string/drawer_menu_relate_friends"
         />
 

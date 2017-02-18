@@ -55,24 +55,5 @@
             android:textColor="@color/gary"
             tools:text="08-21 16:07"
             />
-
-        <ImageView
-            android:id="@+id/image_view"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginRight="8dp"
-            android:src="@drawable/item_comments"
-            android:layout_alignBottom="@+id/item_date"
-            android:layout_toStartOf="@+id/item_comments"/>
-
-        <TextView
-            android:id="@+id/item_comments"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="18dp"
-            android:textColor="@color/gary"
-            tools:text="0"
-            android:layout_alignTop="@+id/image_view"
-            android:layout_alignEnd="@+id/item_content"/>
     </RelativeLayout>
 </android.support.v7.widget.CardView>

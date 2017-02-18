@@ -1,5 +1,6 @@
 package com.example.innf.newchangtu.Map.view.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import com.example.innf.newchangtu.R;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 public class NearbyAddActivity extends BaseActivity {
 
@@ -82,32 +84,46 @@ public class NearbyAddActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_nearby:
+                final ProgressDialog progressDialog = new ProgressDialog(this);
+                progressDialog.show();
                 String content = mContentEditText.getText().toString();
                 if (!content.equals("")){
-                    Nearby nearby = new Nearby();
+                    final Nearby nearby = new Nearby();
                     NearbyLab.get(this).addNearby(nearby);
                     nearby.setContent(content);
-                    nearby.setCommentsNumber(0+"");
                     String address = mAddressTextView.getText().toString();
                     nearby.setAddress(address);
                     Log.d(TAG, "onOptionsItemSelected: " + address);
                     String name = (String) BmobUser.getObjectByKey("name");
                     if (null == name){
-                        name = "用户";
+                        name = "用户" + BmobUser.getCurrentUser(User.class).getObjectId();
                     }
                     nearby.setName(name);
                     nearby.save(new SaveListener<String>() {
                         @Override
                         public void done(String s, BmobException e) {
                             if (null == e){
-                                showToast("发表成功!");
+                                nearby.setObjectId(s);
+                                nearby.update(new UpdateListener() {
+                                    @Override
+                                    public void done(BmobException e) {
+                                        progressDialog.cancel();
+                                        if (null == e){
+                                            showToast("发表成功!");
+                                            finish();
+                                        } else {
+                                            showToast("发表失败!" + e.getMessage());
+                                        }
+
+                                    }
+                                });
                             }else {
-                                showToast("发表失败!" + e.getMessage());
+                                showToast(e.getMessage());
                             }
                         }
                     });
-                    finish();
                 }else {
+                    progressDialog.cancel();
                     showToast("内容为空~");
                 }
                 break;

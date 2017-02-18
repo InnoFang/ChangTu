@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.innf.newchangtu.Map.bean.Contracts;
@@ -84,18 +85,20 @@ public class ContractsAdapter extends RecyclerView.Adapter<ContractsAdapter.Cont
         private Contracts mContracts;
 
         private TextView mContractNameTextView;
-
         private TextView mContractPhoneNumberTextView;
+        private Button mShareMapConnectButton;
         public ContractsHolder(View itemView) {
             super(itemView);
             mContractNameTextView = (TextView) itemView.findViewById(R.id.contracts_name_text_view);
             mContractPhoneNumberTextView = (TextView) itemView.findViewById(R.id.contracts_phone_number_text_view);
+            mShareMapConnectButton = (Button) itemView.findViewById(R.id.share_map_connect_view);
         }
 
         public void bindContracts(Contracts contracts){
             mContracts= contracts;
             mContractNameTextView.setText(mContracts.getName());
             mContractPhoneNumberTextView.setText(mContracts.getPhoneNumber());
+            mShareMapConnectButton.setVisibility(mContracts.isShareConnect() ? View.VISIBLE : View.INVISIBLE);
         }
 
     }
