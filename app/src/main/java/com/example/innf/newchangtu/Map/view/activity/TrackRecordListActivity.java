@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.example.innf.newchangtu.Map.adapter.TrackAdapter;
 import com.example.innf.newchangtu.Map.bean.Track;
-import com.example.innf.newchangtu.Map.model.TrackLab;
+import com.example.innf.newchangtu.Map.manager.TrackLab;
 import com.example.innf.newchangtu.Map.view.base.BaseActivity;
 import com.example.innf.newchangtu.R;
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/navigation_sub_2"
-          android:title="安全出行">
+    <item
+        android:title="安全出行">
         <menu>
             <item android:id="@+id/drawer_menu_nearby"
                   android:checkable="true"
@@ -15,8 +15,8 @@
         </menu>
     </item>
 
-    <item android:id="@+id/navigation_sub_1"
-          android:title="畅途无忧">
+    <item
+        android:title="畅途无忧">
         <menu>
             <item android:id="@+id/drawer_menu_track_record"
                   android:checkable="true"

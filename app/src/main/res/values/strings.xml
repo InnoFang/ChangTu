@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">畅途</string>
-    <string name="send_notification">推送消息</string>
-    <string name="action_settings">Settings</string>
 
     <string name="ok">确认</string>
 
@@ -13,14 +11,12 @@
     <string name="one_click_fast_send_tips">提示：用户在遇到紧急情况时可以利用该功能求助</string>
 
     <!--主界面字符串-->
-    <string name="main_position_report">你当前的位置：%s</string>
     <string name="fast_send">一键发送</string>
     <string name="start_record">开始记录</string>
     <string name="empty_position">还没有你的位置信息，赶紧开始吧~</string>
     <!---->
 
     <!--登录界面字符串-->
-    <string name="log_in_remember_password_check_box">记住密码</string>
     <string name="log_in_hint_account">用户</string>
     <string name="log_in_hint_password">密码</string>
     <string name="log_in_log_in">登录</string>
@@ -32,8 +28,6 @@
     <string name="sign_up_hint_password">密码</string>
     <string name="sign_up_sign_up">注册</string>
     <string name="default_sign_up">默认注册</string>
-    <string name="email_sign_up">邮箱注册</string>
-    <string name="phone_number_sign_up">手机注册</string>
     <string name="sign_up_repeat_new_password">确认密码</string>
 
     <!---->
@@ -43,7 +37,6 @@
     <string name="drawer_menu_map_sharing">地图共享</string>
     <string name="drawer_menu_track_record">足迹记录</string>
     <string name="drawer_menu_personal_setting">个人设置</string>
-    <string name="drawer_menu_broadcast">播报</string>
     <string name="drawer_menu_track">轨迹</string>
     <string name="drawer_menu_nearby">附近</string>
     <!---->
@@ -57,7 +50,6 @@
     <!---->
 
     <!--个人资料界面字符串-->
-    <string name="setting_choose_user_picture_button">选择图片</string>
     <string name="setting_user_name">名字</string>
     <string name="setting_user_age">年龄</string>
     <string name="setting_user_email">邮箱</string>
@@ -83,7 +75,6 @@
     <string name="fab_exchange_map_normal">普通地图</string>
     <string name="fab_exchange_model_compass">罗盘模式</string>
     <string name="fab_exchange_model_common">一般模式</string>
-    <string name="fab_start_track">开始轨迹</string>
     <string name="fab_end_track">结束轨迹</string>
     <!---->
 
@@ -97,13 +88,11 @@
 
     <!--忘记密码界面字符串-->
     <string name="use_email_find_password">利用邮箱找回密码</string>
-    <string name="use_phone_find_password">利用手机找回密码</string>
     <!---->
 
 
     <!--开始记录 界面字符串-->
     <string name="start_record_status">当前位置</string>
-    <string name="start_record_choose_place">地点选择</string>
     <string name="start_record_transportation">出行方式</string>
     <string name="start_record_time_interval">时间间隔</string>
     <string name="start_record_select_contracts">选择联系人</string>
@@ -132,7 +121,6 @@
 
     <!--关联亲友界面字符串-->
     <string name="empty_contracts_list">没有关联亲友</string>
-    <string name="relate_friends_share_map">是否共享共享位置</string>
     <!---->
 
     <!--"忘记密码"字符串 高亮-->
@@ -148,6 +136,5 @@
     <string name="broadcast_sms_with_remark">我现在的位置为：%1$s出发时间为 %2$s ，出行方式为 %3$s。%4$s。</string>
     <string name="broadcast_sms_without_track">我现在的位置为：%1$s。</string>
     <string name="broadcast_sms_without_track_with_remark">我现在的位置为：%1$s。%2$s</string>
-    <string name="broadcast_sms_subject">消息播报</string>
     <!---->
 </resources>

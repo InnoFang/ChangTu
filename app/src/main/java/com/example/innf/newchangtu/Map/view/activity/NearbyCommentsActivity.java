@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.example.innf.newchangtu.Map.adapter.NearbyCommentsAdapter;
 import com.example.innf.newchangtu.Map.bean.Nearby;
 import com.example.innf.newchangtu.Map.bean.NearbyComments;
-import com.example.innf.newchangtu.Map.model.NearbyCommentsLab;
+import com.example.innf.newchangtu.Map.manager.NearbyCommentsLab;
 import com.example.innf.newchangtu.Map.view.base.BaseActivity;
 import com.example.innf.newchangtu.R;
 

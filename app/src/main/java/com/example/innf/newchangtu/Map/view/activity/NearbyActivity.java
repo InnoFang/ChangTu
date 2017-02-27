@@ -25,7 +25,7 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.example.innf.newchangtu.Map.adapter.NearbyAdapter;
 import com.example.innf.newchangtu.Map.bean.Nearby;
-import com.example.innf.newchangtu.Map.model.NearbyLab;
+import com.example.innf.newchangtu.Map.manager.NearbyLab;
 import com.example.innf.newchangtu.Map.utils.AssetsUtils;
 import com.example.innf.newchangtu.Map.utils.RegexValidateUtil;
 import com.example.innf.newchangtu.Map.view.base.BaseActivity;

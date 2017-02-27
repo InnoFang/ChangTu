@@ -17,7 +17,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.innf.newchangtu.Map.bean.User;
-import com.example.innf.newchangtu.Map.model.UserLab;
+import com.example.innf.newchangtu.Map.manager.UserLab;
 import com.example.innf.newchangtu.Map.utils.AddressInitTask;
 import com.example.innf.newchangtu.Map.utils.MyApplication;
 import com.example.innf.newchangtu.Map.view.base.BaseActivity;

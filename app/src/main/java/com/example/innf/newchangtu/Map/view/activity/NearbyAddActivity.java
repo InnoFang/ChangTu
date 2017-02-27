@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.example.innf.newchangtu.Map.bean.Nearby;
 import com.example.innf.newchangtu.Map.bean.User;
-import com.example.innf.newchangtu.Map.model.NearbyLab;
+import com.example.innf.newchangtu.Map.manager.NearbyLab;
 import com.example.innf.newchangtu.Map.utils.AddressInitTask;
 import com.example.innf.newchangtu.Map.view.base.BaseActivity;
 import com.example.innf.newchangtu.R;

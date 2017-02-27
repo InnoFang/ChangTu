@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.innf.newchangtu.Map.bean.User;
-import com.example.innf.newchangtu.Map.model.UserLab;
+import com.example.innf.newchangtu.Map.manager.UserLab;
 import com.example.innf.newchangtu.Map.utils.MyApplication;
 import com.example.innf.newchangtu.Map.utils.RegexValidateUtil;
 import com.example.innf.newchangtu.Map.view.base.BaseActivity;

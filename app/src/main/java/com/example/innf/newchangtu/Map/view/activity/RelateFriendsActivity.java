@@ -29,7 +29,7 @@ import android.widget.TextView;
 import com.example.innf.newchangtu.Map.adapter.ContractsAdapter;
 import com.example.innf.newchangtu.Map.bean.Contracts;
 import com.example.innf.newchangtu.Map.bean.User;
-import com.example.innf.newchangtu.Map.model.ContractsLab;
+import com.example.innf.newchangtu.Map.manager.ContractsLab;
 import com.example.innf.newchangtu.Map.view.base.BaseActivity;
 import com.example.innf.newchangtu.R;
 

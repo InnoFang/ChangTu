@@ -1,4 +1,4 @@
-package com.example.innf.newchangtu.Map.model;
+package com.example.innf.newchangtu.Map.manager;
 
 import android.content.Context;
 
