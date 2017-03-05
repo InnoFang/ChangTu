@@ -242,7 +242,6 @@ public class MainActivity extends BaseMainActivity{
         requestRuntimePermiussion(new String[]{
                 Manifest.permission.INTERNET,
                 Manifest.permission.SEND_SMS,
-                Manifest.permission.VIBRATE,
                 Manifest.permission.WRITE_SETTINGS,
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION,

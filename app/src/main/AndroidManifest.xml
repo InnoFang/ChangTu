@@ -4,8 +4,6 @@
 
     <!-- 允许短信发送 -->
     <uses-permission android:name="android.permission.SEND_SMS"/>
-    <!-- 允许访问振动设备 -->
-    <uses-permission android:name="android.permission.VIBRATE"/>
     <!-- 允许应用读取低级别的系统日志文件 -->
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>
     <!-- 允许应用程序更改主屏幕中的设置和快捷方式 -->
