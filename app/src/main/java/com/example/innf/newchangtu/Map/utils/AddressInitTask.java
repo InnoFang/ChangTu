@@ -11,12 +11,15 @@ import com.alibaba.fastjson.JSON;
 
 import java.util.ArrayList;
 
+import cn.qqtheme.framework.entity.City;
+import cn.qqtheme.framework.entity.County;
+import cn.qqtheme.framework.entity.Province;
 import cn.qqtheme.framework.picker.AddressPicker;
 
 /**
  * 获取地址数据并显示地址选择器
  */
-public class AddressInitTask extends AsyncTask<String, Void, ArrayList<AddressPicker.Province>> {
+public class AddressInitTask extends AsyncTask<String, Void, ArrayList<Province>> {
     private Activity activity;
     private ProgressDialog dialog;
     private String selectedProvince = "", selectedCity = "", selectedCounty = "";
@@ -24,6 +27,7 @@ public class AddressInitTask extends AsyncTask<String, Void, ArrayList<AddressPi
     private StringBuilder address = new StringBuilder();
     private TextView mTextView;
     private Button mButton;
+
     /**
      * 初始化为不显示区县的模式
      *
@@ -41,6 +45,7 @@ public class AddressInitTask extends AsyncTask<String, Void, ArrayList<AddressPi
         this.mTextView = textView;
         dialog = ProgressDialog.show(activity, null, "正在初始化数据...", true, true);
     }
+
     public AddressInitTask(Activity activity, Button button) {
         this.activity = activity;
         this.mButton = button;
@@ -48,7 +53,7 @@ public class AddressInitTask extends AsyncTask<String, Void, ArrayList<AddressPi
     }
 
     @Override
-    protected ArrayList<AddressPicker.Province> doInBackground(String... params) {
+    protected ArrayList<Province> doInBackground(String... params) {
         if (params != null) {
             switch (params.length) {
                 case 1:
@@ -67,10 +72,10 @@ public class AddressInitTask extends AsyncTask<String, Void, ArrayList<AddressPi
                     break;
             }
         }
-        ArrayList<AddressPicker.Province> data = new ArrayList<AddressPicker.Province>();
+        ArrayList<Province> data = new ArrayList<Province>();
         try {
             String json = AssetsUtils.readText(activity, "city.json");
-            data.addAll(JSON.parseArray(json, AddressPicker.Province.class));
+            data.addAll(JSON.parseArray(json, Province.class));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -78,7 +83,7 @@ public class AddressInitTask extends AsyncTask<String, Void, ArrayList<AddressPi
     }
 
     @Override
-    protected void onPostExecute(ArrayList<AddressPicker.Province> result) {
+    protected void onPostExecute(ArrayList<Province> result) {
         dialog.dismiss();
         if (result.size() > 0) {
             AddressPicker picker = new AddressPicker(activity, result);
@@ -86,10 +91,10 @@ public class AddressInitTask extends AsyncTask<String, Void, ArrayList<AddressPi
             picker.setSelectedItem(selectedProvince, selectedCity, selectedCounty);
             picker.setOnAddressPickListener(new AddressPicker.OnAddressPickListener() {
                 @Override
-                public void onAddressPicked(AddressPicker.Province province, AddressPicker.City city, AddressPicker.County county) {
-                    if (null != mTextView){
+                public void onAddressPicked(Province province, City city, County county) {
+                    if (null != mTextView) {
                         mTextView.setText(getAddress(province, city, county));
-                    }else if (null != mButton){
+                    } else if (null != mButton) {
                         mButton.setText(getAddress(province, city, county));
                     }
                 }
@@ -100,10 +105,10 @@ public class AddressInitTask extends AsyncTask<String, Void, ArrayList<AddressPi
         }
     }
 
-    public String getAddress(AddressPicker.Province province, AddressPicker.City city, AddressPicker.County county){
+    public String getAddress(Province province, City city, County county) {
         address.append(RegexValidateUtil.getChineseInString(province + ""));
         address.append(RegexValidateUtil.getChineseInString(city + ""));
-        if (county != null){
+        if (county != null) {
             address.append(RegexValidateUtil.getChineseInString(county + ""));
         }
         Toast.makeText(activity, address.toString(), Toast.LENGTH_SHORT).show();

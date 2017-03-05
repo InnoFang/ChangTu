@@ -39,6 +39,9 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.qqtheme.framework.entity.City;
+import cn.qqtheme.framework.entity.County;
+import cn.qqtheme.framework.entity.Province;
 import cn.qqtheme.framework.picker.AddressPicker;
 
 /**
@@ -47,7 +50,7 @@ import cn.qqtheme.framework.picker.AddressPicker;
  * Description:
  */
 
-public class NearbyActivity extends BaseActivity{
+public class NearbyActivity extends BaseActivity {
 
     private static final String TAG = "NearbyActivity";
     private static final int REFRESH_COMPLETE = 0x110;
@@ -63,6 +66,7 @@ public class NearbyActivity extends BaseActivity{
     private NearbyAdapter mNearbyAdapter;
 
     public int mItemPosition;
+
     //    private static NearbyActivity sNearbyActivity;
 //
 //    private NearbyActivity(){
@@ -83,14 +87,14 @@ public class NearbyActivity extends BaseActivity{
         Toolbar toolbar = (Toolbar) findViewById(R.id.action_toolbar);
         setSupportActionBar(toolbar);
         String address = (String) BmobUser.getObjectByKey("address");
-        if (null == address){
+        if (null == address) {
             address = "位置未指定";
         }
         mNearbyNameTextView = (TextView) findViewById(R.id.nearby_name_text_view);
         mNearbyNameTextView.setText(address);
 
         ActionBar actionBar = getSupportActionBar();
-        if (null != actionBar){
+        if (null != actionBar) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowTitleEnabled(false);
         }
@@ -124,7 +128,6 @@ public class NearbyActivity extends BaseActivity{
     }
 
 
-
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -142,10 +145,10 @@ public class NearbyActivity extends BaseActivity{
 
         showEmptyView(nearbyList.isEmpty());
         queryNearby();
-        if (null == mNearbyAdapter){
+        if (null == mNearbyAdapter) {
             mNearbyAdapter = new NearbyAdapter(nearbyList);
             mNearbyRecyclerView.setAdapter(mNearbyAdapter);
-        }else {
+        } else {
             mNearbyAdapter.setNearbyList(nearbyList);
             mNearbyAdapter.notifyItemChanged(mItemPosition);
         }
@@ -158,7 +161,8 @@ public class NearbyActivity extends BaseActivity{
             }
         });
     }
-    private void queryNearby(){
+
+    private void queryNearby() {
         showEmptyView(false);
         mSwipeRefreshLayout.setRefreshing(true);
         BmobQuery<Nearby> query = new BmobQuery<>();
@@ -166,9 +170,9 @@ public class NearbyActivity extends BaseActivity{
         query.findObjects(new FindListener<Nearby>() {
             @Override
             public void done(List<Nearby> list, BmobException e) {
-                if (null == e){
+                if (null == e) {
                     mNearbyAdapter.clear();
-                    if (null == list || list.size() == 0){
+                    if (null == list || list.size() == 0) {
                         showEmptyView(true);
                         mNearbyAdapter.notifyDataSetChanged();
                         return;
@@ -178,7 +182,7 @@ public class NearbyActivity extends BaseActivity{
 //                    mNearbyAdapter.addAll(list);
                     mNearbyRecyclerView.setAdapter(mNearbyAdapter);
                     mSwipeRefreshLayout.setRefreshing(false);
-                }else {
+                } else {
                     showEmptyView(true);
                 }
             }
@@ -210,7 +214,7 @@ public class NearbyActivity extends BaseActivity{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menu_edit:
                 Intent intent = NearbyAddActivity.newIntent(this);
                 startActivity(intent);
@@ -220,11 +224,11 @@ public class NearbyActivity extends BaseActivity{
     }
 
 
-    public void showEmptyView(boolean isEmpty){
-        if (isEmpty){
+    public void showEmptyView(boolean isEmpty) {
+        if (isEmpty) {
             mNearbyRecyclerView.setVisibility(View.INVISIBLE);
             mEmptyTextView.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             mNearbyRecyclerView.setVisibility(View.VISIBLE);
             mEmptyTextView.setVisibility(View.GONE);
         }
@@ -236,12 +240,13 @@ public class NearbyActivity extends BaseActivity{
         updateUI();
     }
 
-    class AddressInitTask extends AsyncTask<String, Void, ArrayList<AddressPicker.Province>> {
+    class AddressInitTask extends AsyncTask<String, Void, ArrayList<Province>> {
         private Activity activity;
         private ProgressDialog dialog;
         private String selectedProvince = "", selectedCity = "", selectedCounty = "";
         private boolean hideCounty = false;
         private StringBuilder address = new StringBuilder();
+
         /**
          * 初始化为不显示区县的模式
          *
@@ -260,7 +265,7 @@ public class NearbyActivity extends BaseActivity{
         }
 
         @Override
-        protected ArrayList<AddressPicker.Province> doInBackground(String... params) {
+        protected ArrayList<Province> doInBackground(String... params) {
             if (params != null) {
                 switch (params.length) {
                     case 1:
@@ -279,10 +284,10 @@ public class NearbyActivity extends BaseActivity{
                         break;
                 }
             }
-            ArrayList<AddressPicker.Province> data = new ArrayList<AddressPicker.Province>();
+            ArrayList<Province> data = new ArrayList<Province>();
             try {
                 String json = AssetsUtils.readText(activity, "city.json");
-                data.addAll(JSON.parseArray(json, AddressPicker.Province.class));
+                data.addAll(JSON.parseArray(json, Province.class));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -290,7 +295,7 @@ public class NearbyActivity extends BaseActivity{
         }
 
         @Override
-        protected void onPostExecute(ArrayList<AddressPicker.Province> result) {
+        protected void onPostExecute(ArrayList<Province> result) {
             dialog.dismiss();
             if (result.size() > 0) {
                 AddressPicker picker = new AddressPicker(activity, result);
@@ -298,7 +303,7 @@ public class NearbyActivity extends BaseActivity{
                 picker.setSelectedItem(selectedProvince, selectedCity, selectedCounty);
                 picker.setOnAddressPickListener(new AddressPicker.OnAddressPickListener() {
                     @Override
-                    public void onAddressPicked(AddressPicker.Province province, AddressPicker.City city, AddressPicker.County county) {
+                    public void onAddressPicked(Province province, City city, County county) {
                         mNearbyNameTextView.setText(getAddress(province, city, county));
                     }
                 });
@@ -308,10 +313,10 @@ public class NearbyActivity extends BaseActivity{
             }
         }
 
-        public String getAddress(AddressPicker.Province province, AddressPicker.City city, AddressPicker.County county){
+        public String getAddress(Province province, City city, County county) {
             address.append(RegexValidateUtil.getChineseInString(province + ""));
             address.append(RegexValidateUtil.getChineseInString(city + ""));
-            if (county != null){
+            if (county != null) {
                 address.append(RegexValidateUtil.getChineseInString(county + ""));
             }
             Toast.makeText(activity, "位置已切换至：" + address.toString() + "，请下拉刷新", Toast.LENGTH_SHORT).show();

@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "com.example.innf.newchangtu"
@@ -44,7 +44,7 @@ dependencies {
     compile 'com.getbase:floatingactionbutton:1.10.1'
     compile 'com.android.support:recyclerview-v7:24.1.1'
     compile 'com.alibaba:fastjson:1.1.46.android'
-    compile 'cn.qqtheme.framework:WheelPicker:latest.release'
+    compile 'cn.qqtheme.framework:WheelPicker:1.4.3'
     compile 'com.kyleduo.switchbutton:library:1.4.4'
 
     compile files('libs/gson-2.2.1.jar')

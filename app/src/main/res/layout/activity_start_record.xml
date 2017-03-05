@@ -181,6 +181,7 @@
                 style="?android:listSeparatorTextViewStyle"/>
 
             <EditText
+                android:id="@+id/remark_edit_text"
                 android:layout_width="match_parent"
                 android:background="@drawable/bg_edit_text"
                 android:layout_marginBottom="20dp"
