@@ -1,5 +1,6 @@
 package com.example.innf.newchangtu.Map.view.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -59,6 +60,7 @@ import com.example.innf.newchangtu.Map.bean.Track;
 import com.example.innf.newchangtu.Map.bean.User;
 import com.example.innf.newchangtu.Map.manager.PositionLab;
 import com.example.innf.newchangtu.Map.utils.MyApplication;
+import com.example.innf.newchangtu.Map.utils.PermissionListener;
 import com.example.innf.newchangtu.Map.view.base.BaseMainActivity;
 import com.example.innf.newchangtu.Map.widget.ContainMapLayout;
 import com.example.innf.newchangtu.R;
@@ -236,7 +238,35 @@ public class MainActivity extends BaseMainActivity{
             }
         });
 
-        Log.i(TAG, "onCreate: is called");
+        // 运行时权限请求
+        requestRuntimePermiussion(new String[]{
+                Manifest.permission.INTERNET,
+                Manifest.permission.SEND_SMS,
+                Manifest.permission.VIBRATE,
+                Manifest.permission.WRITE_SETTINGS,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.CHANGE_WIFI_STATE,
+                Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
+                Manifest.permission.READ_LOGS,
+                Manifest.permission.ACCESS_NETWORK_STATE,
+                Manifest.permission.ACCESS_WIFI_STATE,
+                Manifest.permission.WAKE_LOCK,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_PHONE_STATE
+        }, new PermissionListener() {
+            @Override
+            public void onGranted() {
+
+            }
+
+            @Override
+            public void onDenied(List<String> deniedPermission) {
+                for (String permission : deniedPermission) {
+                    showToast("被拒绝权限" + permission + ", 拒绝该权限将无法使用相关功能");
+                }
+            }
+        });
     }
 
     private void queryLastTrack() {

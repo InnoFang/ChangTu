@@ -30,4 +30,11 @@ public class AppCompatActivityCollector {
             }
         }
     }
+
+    public static AppCompatActivity getTopActivity() {
+        if (sAppCompatActivities.isEmpty()) {
+            return null;
+        }
+        return sAppCompatActivities.get(sAppCompatActivities.size() - 1); // 返回栈顶Activity
+    }
 }

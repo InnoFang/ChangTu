@@ -2,8 +2,12 @@ package com.example.innf.newchangtu.Map.view.base;
 
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -16,6 +20,9 @@ import com.example.innf.newchangtu.Map.bean.User;
 import com.example.innf.newchangtu.Map.configure.BmobConf;
 import com.example.innf.newchangtu.Map.utils.AppCompatActivityCollector;
 import com.example.innf.newchangtu.Map.utils.PermissionListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.bmob.v3.BmobUser;
 
@@ -30,6 +37,7 @@ public class BaseActivity extends AppCompatActivity {
     public User mUser;/*当前用户对象*/
     private ChangtuThreeReceiver mChangtuThreeReceiver;
     private static PermissionListener mListener;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,10 +45,10 @@ public class BaseActivity extends AppCompatActivity {
         SDKInitializer.initialize(getApplicationContext());
 
         //初始化Bmob SDK
-        BmobConf.Bmobnitialize(this, 30 , 1024*1024, 2500, true);
+        BmobConf.Bmobnitialize(this, 30, 1024 * 1024, 2500, true);
         /*检查是否具有Bmob当前对象*/
         mUser = BmobUser.getCurrentUser(User.class);
-        if (null == mUser){
+        if (null == mUser) {
             mUser = new User();
         }
 //        BmobConfig config = new BmobConfig.Builder(this)
@@ -60,7 +68,53 @@ public class BaseActivity extends AppCompatActivity {
         AppCompatActivityCollector.addAppCompatActivity(this);
     }
 
-//    public static void requestRuntimePermiussion
+    public static void requestRuntimePermiussion(String[] permissions, PermissionListener listener) {
+        AppCompatActivity topActivity = AppCompatActivityCollector.getTopActivity();
+        if (null == topActivity) {
+            return;
+        }
+        mListener = listener;
+        List<String> permissionList = new ArrayList<>();
+        for (String permission : permissions) {
+            if (ContextCompat.checkSelfPermission(topActivity, permission)
+                    != PackageManager.PERMISSION_GRANTED){
+                permissionList.add(permission);
+            }
+        }
+        if (!permissionList.isEmpty()) {
+            ActivityCompat.requestPermissions(topActivity
+                    , permissionList.toArray(new String[permissionList.size()])
+                    , 1);
+        } else {
+            mListener.onGranted();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0) {
+                    List<String> deniedPermission = new ArrayList<>();
+                    for (int i = 0; i < deniedPermission.size(); i++) {
+                        int grantResult = grantResults[i];
+                        String permission = permissions[i];
+                        if (grantResult != PackageManager.PERMISSION_GRANTED) {
+                            deniedPermission.add(permission);
+                        }
+                    }
+                    if (deniedPermission.isEmpty()){
+                        mListener.onGranted();
+                    } else {
+                        mListener.onDenied(deniedPermission);
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+    }
 
     Toast mToast;
 
@@ -94,7 +148,7 @@ public class BaseActivity extends AppCompatActivity {
         // only when screen turns on
         if (!ChangtuThreeReceiver.wasScreenOn) {
             // this is when onResume() is called due to a screen state change
-            Log.i("SCREEN","on");
+            Log.i("SCREEN", "on");
         } else {
             // this is when onResume() is called when the screen state has not changed
         }
@@ -121,6 +175,7 @@ public class BaseActivity extends AppCompatActivity {
         }
         return super.onKeyLongPress(keyCode, event);
     }
+
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.KEYCODE_POWER) {
