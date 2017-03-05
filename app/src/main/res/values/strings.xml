@@ -13,7 +13,6 @@
     <!--主界面字符串-->
     <string name="fast_send">一键发送</string>
     <string name="start_record">开始记录</string>
-    <string name="empty_position">还没有你的位置信息，赶紧开始吧~</string>
     <!---->
 
     <!--登录界面字符串-->
