@@ -15,6 +15,7 @@ import com.example.innf.newchangtu.Map.ChangtuThreeReceiver;
 import com.example.innf.newchangtu.Map.bean.User;
 import com.example.innf.newchangtu.Map.configure.BmobConf;
 import com.example.innf.newchangtu.Map.utils.AppCompatActivityCollector;
+import com.example.innf.newchangtu.Map.utils.PermissionListener;
 
 import cn.bmob.v3.BmobUser;
 
@@ -28,7 +29,7 @@ public class BaseActivity extends AppCompatActivity {
 
     public User mUser;/*当前用户对象*/
     private ChangtuThreeReceiver mChangtuThreeReceiver;
-
+    private static PermissionListener mListener;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +59,8 @@ public class BaseActivity extends AppCompatActivity {
 
         AppCompatActivityCollector.addAppCompatActivity(this);
     }
+
+//    public static void requestRuntimePermiussion
 
     Toast mToast;
 
