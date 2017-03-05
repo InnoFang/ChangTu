@@ -31,6 +31,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -126,7 +127,7 @@ public class MainActivity extends BaseMainActivity{
     private CollapsingToolbarLayout mCollapsingToolbarLayout;
     private ContainMapLayout mContainMapLayout;
     private DrawerLayout mDrawerLayout;
-    private ImageView mEmptyView;
+    private LinearLayout mEmptyView;
 
     private int mTimeInterval = 0;
     private Track mTrack = null;
@@ -171,7 +172,7 @@ public class MainActivity extends BaseMainActivity{
         mPositionRecyclerView = (RecyclerView) findViewById(R.id.position_recycler_view);
         mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar_layout);
         mContainMapLayout = (ContainMapLayout) findViewById(R.id.contain_map_layout);
-        mEmptyView = (ImageView) findViewById(R.id.empty_view);
+        mEmptyView = (LinearLayout) findViewById(R.id.empty_view);
 
       /*创建LinearLayoutManager对象，让RecyclerView的元素倒序显示，并且初始元素不默认从底部开始显示*/
 

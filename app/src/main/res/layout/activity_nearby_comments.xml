@@ -91,14 +91,26 @@
                 android:layout_marginRight="5dp"
                 />
 
-            <ImageView
+            <LinearLayout
                 android:id="@+id/empty_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/empty_view"
-                android:layout_gravity="center_horizontal|bottom"
-                android:visibility="gone"
-                />
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/ic_empty"/>
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:text="@string/empty_view_desc"
+                    android:textSize="25sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
         </FrameLayout>
 
     </LinearLayout>

@@ -136,5 +136,6 @@
     <string name="broadcast_sms_with_remark">我现在的位置为：%1$s出发时间为 %2$s ，出行方式为 %3$s。%4$s。</string>
     <string name="broadcast_sms_without_track">我现在的位置为：%1$s。</string>
     <string name="broadcast_sms_without_track_with_remark">我现在的位置为：%1$s。%2$s</string>
+    <string name="empty_view_desc">这里空空如也~</string>
     <!---->
 </resources>

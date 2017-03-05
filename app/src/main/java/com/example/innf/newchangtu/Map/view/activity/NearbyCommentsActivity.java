@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.innf.newchangtu.Map.adapter.NearbyCommentsAdapter;
@@ -39,7 +40,7 @@ public class NearbyCommentsActivity extends BaseActivity implements View.OnClick
     private ImageView mNearbyCommentsAddImageView;
     private List<NearbyComments> mNearbyCommentsList;
     private NearbyCommentsAdapter mNearbyCommentsAdapter;
-    private ImageView mEmptyView;
+    private LinearLayout mEmptyView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,7 @@ public class NearbyCommentsActivity extends BaseActivity implements View.OnClick
         }
 
 
-        mEmptyView = (ImageView) findViewById(R.id.empty_view);
+        mEmptyView = (LinearLayout) findViewById(R.id.empty_view);
         mNearbyNameTextView = (TextView) findViewById(R.id.nearby_name_text_view);
         mNearbyContentTextView = (TextView) findViewById(R.id.nearby_content_text_view);
         mNearbyDateTextView = (TextView) findViewById(R.id.nearby_date_text_view);
