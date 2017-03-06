@@ -7,13 +7,13 @@ Changtu -- this is a service class application software that for the poor areas 
 
 “畅途” ———— 是一款结合针对交通安全较差的地区、安全意识较低人群以及面向出门远行人生地不熟而开发的一款服务类应用软件。
 
-## Co-worker
+## Co-worker (合作者)
 
  + [DreamYHD](https://github.com/DreamYHD)
 
 ## Feature (功能)
 
-<table border="1px solid green" style="border-collapse: collapse" cellpadding="15">
+  <table border="1px solid green" style="border-collapse: collapse" cellpadding="15">
         <tr>
             <th width="100px">功能名称</th>
             <td>功能描述</td>
@@ -59,6 +59,24 @@ Changtu -- this is a service class application software that for the poor areas 
             <td>用户可以选择切换地点查看某个想去的陌生地方的信息(信息由当地畅途用户提供)，便于用户出门远行，了解当地风气。</td>
         </tr>
     </table>
+
+
+## Third-party libraries used (第三方库使用)
+
+>compile 'cn.bmob.android:bmob-sdk:3.5.1'  
+    compile 'cn.bmob.android:bmob-push:0.8'  
+    compile 'cn.bmob.android:bmob-im:2.0.5@aar'  
+    compile 'com.getbase:floatingactionbutton:1.10.1'  
+    compile 'com.alibaba:fastjson:1.1.46.android'  
+    compile 'cn.qqtheme.framework:WheelPicker:1.4.3'  
+    compile 'com.kyleduo.switchbutton:library:1.4.4'  
+    compile files('libs/gson-2.2.1.jar')  
+    compile files('libs/androidasync-2.1.6.jar')  
+    compile files('libs/okhttp-3.2.0.jar')  
+    compile files('libs/okio-1.7.0.jar')  
+    compile files('libs/BaiduTraceSDK_v2_1_12.jar')  
+    compile files('libs/BaiduLBS_Android.jar')  
+    
 
 ## Screenshot (截图)
 
