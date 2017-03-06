@@ -1,5 +1,4 @@
-# ChangTu
-
+# ChangTu (畅途)
 <img src="https://github.com/InnoFang/ChangTu/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" height="100px" width="100px"/>
 
 [点击下载](https://github.com/InnoFang/ChangTu/blob/master/apk/changtu.apk?raw=true)  
@@ -8,7 +7,7 @@ Changtu -- this is a service class application software that for the poor areas 
 
 “畅途” ———— 是一款结合针对交通安全较差的地区、安全意识较低人群以及面向出门远行人生地不熟而开发的一款服务类应用软件。
 
-## 功能简介
+## Feature (功能)
 
 <table border="1px solid green" style="border-collapse: collapse" cellpadding="15">
         <tr>
@@ -57,8 +56,7 @@ Changtu -- this is a service class application software that for the poor areas 
         </tr>
     </table>
 
-## App 展示
-
+## Screenshot (截图)
 
 ![主界面](https://github.com/InnoFang/ChangTu/blob/master/picture/ppt_%E4%B8%BB%E7%95%8C%E9%9D%A2.png)![开始行程](https://github.com/InnoFang/ChangTu/blob/master/picture/ppt_%E5%BC%80%E5%A7%8B%E8%A1%8C%E7%A8%8B.png)
 
