@@ -8,6 +8,8 @@ Changtu -- this is a service class application software that for the poor areas 
 
 ## 功能简介
 
+![功能介绍](https://github.com/InnoFang/ChangTu/blob/master/picture/%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D.jpg)
+
 ## App 展示
 “畅途” ———— 是一款结合针对交通安全较差的地区、安全意识较低人群以及面向出门远行人生地不熟而开发的一款服务类应用软件。
 
