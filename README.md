@@ -87,26 +87,4 @@ Changtu -- this is a service class application software that for the poor areas 
 ![足迹记录](https://github.com/InnoFang/ChangTu/blob/master/picture/ppt_%E8%B6%B3%E8%BF%B9%E8%AE%B0%E5%BD%95.png)![轨迹显示](https://github.com/InnoFang/ChangTu/blob/master/picture/ppt_%E8%BD%A8%E8%BF%B9%E6%98%BE%E7%A4%BA.png)
 ![附近列表](https://github.com/InnoFang/ChangTu/blob/master/picture/ppt_%E9%99%84%E8%BF%91%E5%88%97%E8%A1%A8.png)![附近评论](https://github.com/InnoFang/ChangTu/blob/master/picture/ppt_%E9%99%84%E8%BF%91%E8%AF%84%E8%AE%BA.png)
 ## License
-
-
-      MIT License
-
-      Copyright (c) [year] [fullname]
-
-      Permission is hereby granted, free of charge, to any person obtaining a copy
-      of this software and associated documentation files (the "Software"), to deal
-      in the Software without restriction, including without limitation the rights
-      to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-      copies of the Software, and to permit persons to whom the Software is
-      furnished to do so, subject to the following conditions:
-
-      The above copyright notice and this permission notice shall be included in all
-      copies or substantial portions of the Software.
-
-      THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-      IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-      FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-      AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-      LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-      OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-      SOFTWARE.
+  [Apache License 2.0](https://github.com/InnoFang/ChangTu/blob/master/LICENSE)
