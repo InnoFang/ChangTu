@@ -4,7 +4,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.example.innf.newchangtu.Map.bean.User;
-import com.example.innf.newchangtu.Map.utils.MyApplication;
+import com.example.innf.newchangtu.Map.MyApplication;
 
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.UpdateListener;

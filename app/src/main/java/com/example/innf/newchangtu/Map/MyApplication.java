@@ -1,7 +1,9 @@
-package com.example.innf.newchangtu.Map.utils;
+package com.example.innf.newchangtu.Map;
 
 import android.app.Application;
 import android.content.Context;
+
+import com.example.innf.newchangtu.Map.utils.CrashHandler;
 
 /**
  * Author: Inno Fang
@@ -16,7 +18,8 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        context = getApplicationContext();
+        context = this;
+        CrashHandler.getInstance().init(getApplicationContext());
     }
 
     public static Context getContext() {

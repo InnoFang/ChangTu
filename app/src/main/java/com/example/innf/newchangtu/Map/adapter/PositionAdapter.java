@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.innf.newchangtu.Map.bean.Position;
-import com.example.innf.newchangtu.Map.utils.MyApplication;
+import com.example.innf.newchangtu.Map.MyApplication;
 import com.example.innf.newchangtu.R;
 
 import java.util.List;

@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.innf.newchangtu.Map.bean.Contracts;
-import com.example.innf.newchangtu.Map.utils.MyApplication;
+import com.example.innf.newchangtu.Map.MyApplication;
 import com.example.innf.newchangtu.R;
 
 import java.util.List;

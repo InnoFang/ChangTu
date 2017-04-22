@@ -59,7 +59,7 @@ import com.example.innf.newchangtu.Map.bean.Position;
 import com.example.innf.newchangtu.Map.bean.Track;
 import com.example.innf.newchangtu.Map.bean.User;
 import com.example.innf.newchangtu.Map.manager.PositionLab;
-import com.example.innf.newchangtu.Map.utils.MyApplication;
+import com.example.innf.newchangtu.Map.MyApplication;
 import com.example.innf.newchangtu.Map.utils.PermissionListener;
 import com.example.innf.newchangtu.Map.view.base.BaseMainActivity;
 import com.example.innf.newchangtu.Map.widget.ContainMapLayout;
