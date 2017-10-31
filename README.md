@@ -86,5 +86,23 @@ Changtu -- this is a service class application software that for the poor areas 
 ![自定义播报模板](https://github.com/InnoFang/ChangTu/blob/master/picture/ppt_%E6%92%AD%E6%8A%A5%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E6%9D%BF.png)![紧急求助](https://github.com/InnoFang/ChangTu/blob/master/picture/ppt_%E7%B4%A7%E6%80%A5%E6%B1%82%E5%8A%A9.png)
 ![足迹记录](https://github.com/InnoFang/ChangTu/blob/master/picture/ppt_%E8%B6%B3%E8%BF%B9%E8%AE%B0%E5%BD%95.png)![轨迹显示](https://github.com/InnoFang/ChangTu/blob/master/picture/ppt_%E8%BD%A8%E8%BF%B9%E6%98%BE%E7%A4%BA.png)
 ![附近列表](https://github.com/InnoFang/ChangTu/blob/master/picture/ppt_%E9%99%84%E8%BF%91%E5%88%97%E8%A1%A8.png)![附近评论](https://github.com/InnoFang/ChangTu/blob/master/picture/ppt_%E9%99%84%E8%BF%91%E8%AF%84%E8%AE%BA.png)
-## License
-  [Apache License 2.0](https://github.com/InnoFang/ChangTu/blob/master/LICENSE)
+
+
+## [License](https://github.com/InnoFang/ChangTu/blob/master/LICENSE)
+  
+```
+
+   Copyright 2016 InnoFang
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+```
