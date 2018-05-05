@@ -7,9 +7,13 @@ Changtu -- this is a service class application software that for the poor areas 
 
 “畅途” ———— 是一款结合针对交通安全较差的地区、安全意识较低人群以及面向出门远行人生地不熟而开发的一款服务类应用软件。
 
+<br />
+
 ## Co-worker (合作者)
 
  + [DreamYHD](https://github.com/DreamYHD)
+
+<br />
 
 ## Feature (功能)
 
@@ -25,7 +29,7 @@ Changtu -- this is a service class application software that for the poor areas 
         <tr>
             <th>用户位置实时显示</th>
             <td  style="text-align: center">1) 方式一：创建行程，开始记录
-用户通过选择指定联系人，乘坐交通工具，位置信息显示时间间隔，确认后开始记录并以列表的形式显示用户当前位置，时间及距离上一个地点的距离。
+用户通过选择指定联系人，乘坐交通工具，位置信息显示时间间隔，确认后开始记录并以列表的形式显示用户当前位置，时间及距离上一个地点的距离。<br />
 2) 方式二：
 用户在主界面可以点击”快速定位”，应用将自动为用户以当前点为起点开始记录，并以列表的形式显示用户当前位置，时间及距离上一个地点的距离。
 </td>
@@ -60,11 +64,12 @@ Changtu -- this is a service class application software that for the poor areas 
         </tr>
     </table>
 
+<br />
 
 ## Third-party libraries used (第三方库使用)
 
 		
-		implementation 'com.android.support:appcompat-v7:27.1.1'
+	implementation 'com.android.support:appcompat-v7:27.1.1'
 	    implementation 'com.android.support:support-v4:27.1.1'
 	    implementation 'com.android.support:design:27.1.1'
 	    implementation 'com.android.support:recyclerview-v7:27.1.1'
