@@ -1,18 +1,19 @@
+//noinspection GradleCompatible
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion '25.0.0'
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "com.example.innf.newchangtu"
         minSdkVersion 21
-        targetSdkVersion 22
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
     }
-    packagingOptions{
+    packagingOptions {
         exclude 'META-INF/DEPENDENCIES.txt'
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/NOTICE.txt'
@@ -31,26 +32,29 @@ android {
     }
 }
 
-dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.2.0'
-    compile 'com.android.support:support-v4:24.1.1'
-    compile 'com.android.support:design:24.2.0'
-    compile 'com.android.support:recyclerview-v7:24.1.1'
-    compile 'com.android.support:cardview-v7:24.1.1'
-    compile 'cn.bmob.android:bmob-sdk:3.5.1'
-    compile 'cn.bmob.android:bmob-push:0.8'
-    compile 'cn.bmob.android:bmob-im:2.0.5@aar'
-    compile 'com.getbase:floatingactionbutton:1.10.1'
-    compile 'com.alibaba:fastjson:1.1.46.android'
-    compile 'cn.qqtheme.framework:WheelPicker:1.4.3'
-    compile 'com.kyleduo.switchbutton:library:1.4.4'
+configurations.all {
+    resolutionStrategy {
+        force 'com.android.support:support-v4:27.1.1'
+    }
+}
 
-    compile files('libs/gson-2.2.1.jar')
-    compile files('libs/androidasync-2.1.6.jar')
-    compile files('libs/okhttp-3.2.0.jar')
-    compile files('libs/okio-1.7.0.jar')
-    compile files('libs/BaiduTraceSDK_v2_1_12.jar')
-    compile files('libs/BaiduLBS_Android.jar')
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation 'cn.bmob.android:bmob-sdk:3.5.1'
+    implementation 'cn.bmob.android:bmob-push:0.8'
+    implementation 'cn.bmob.android:bmob-im:2.0.5@aar'
+    implementation 'com.getbase:floatingactionbutton:1.10.1'
+    implementation 'com.alibaba:fastjson:1.1.46.android'
+    implementation 'cn.qqtheme.framework:WheelPicker:1.4.3'
+    implementation 'com.kyleduo.switchbutton:library:1.4.4'
+
+    implementation files('libs/BaiduTraceSDK_v2_1_12.jar')
+    implementation files('libs/BaiduLBS_Android.jar')
+
 }
