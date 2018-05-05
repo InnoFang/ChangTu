@@ -10,7 +10,6 @@
 
 <a href="https://github.com/InnoFang/ChangTu/blob/master/apk/changtu.apk?raw=true">点击下载</a>
 
-</div>
 
 <br />
 
@@ -34,7 +33,7 @@
         <tr>
             <th>用户位置实时显示</th>
             <td align="center">1) 方式一：创建行程，开始记录
-用户通过选择指定联系人，乘坐交通工具，位置信息显示时间间隔，确认后开始记录并以列表的形式显示用户当前位置，时间及距离上一个地点的距离。
+用户通过选择指定联系人，乘坐交通工具，位置信息显示时间间隔，确认后开始记录并以列表的形式显示用户当前位置，时间及距离上一个地点的距离。<br/>
 2) 方式二：
 用户在主界面可以点击”快速定位”，应用将自动为用户以当前点为起点开始记录，并以列表的形式显示用户当前位置，时间及距离上一个地点的距离。
 </td>
@@ -74,21 +73,21 @@
 ## Third-party libraries used (第三方库使用)
 
 		
-		implementation 'com.android.support:appcompat-v7:27.1.1'
-	    implementation 'com.android.support:support-v4:27.1.1'
-	    implementation 'com.android.support:design:27.1.1'
-	    implementation 'com.android.support:recyclerview-v7:27.1.1'
-	    implementation 'com.android.support:cardview-v7:27.1.1'
-	    implementation 'cn.bmob.android:bmob-sdk:3.5.1'
-	    implementation 'cn.bmob.android:bmob-push:0.8'
-	    implementation 'cn.bmob.android:bmob-im:2.0.5@aar'
-	    implementation 'com.getbase:floatingactionbutton:1.10.1'
-	    implementation 'com.alibaba:fastjson:1.1.46.android'
-	    implementation 'cn.qqtheme.framework:WheelPicker:1.4.3'
-	    implementation 'com.kyleduo.switchbutton:library:1.4.4'
+	implementation 'com.android.support:appcompat-v7:27.1.1'
+	implementation 'com.android.support:support-v4:27.1.1'
+	implementation 'com.android.support:design:27.1.1'
+	implementation 'com.android.support:recyclerview-v7:27.1.1'
+	implementation 'com.android.support:cardview-v7:27.1.1'
+	implementation 'cn.bmob.android:bmob-sdk:3.5.1'
+	implementation 'cn.bmob.android:bmob-push:0.8'
+	implementation 'cn.bmob.android:bmob-im:2.0.5@aar'
+	implementation 'com.getbase:floatingactionbutton:1.10.1'
+	implementation 'com.alibaba:fastjson:1.1.46.android'
+	implementation 'cn.qqtheme.framework:WheelPicker:1.4.3'
+	implementation 'com.kyleduo.switchbutton:library:1.4.4'
 
-	    implementation files('libs/BaiduTraceSDK_v2_1_12.jar')
-	    implementation files('libs/BaiduLBS_Android.jar')
+	implementation files('libs/BaiduTraceSDK_v2_1_12.jar')
+	implementation files('libs/BaiduLBS_Android.jar')
     
 
 ## Screenshot (截图)
@@ -109,3 +108,4 @@
   This is free software, and you are welcome to redistribute it
   under certain conditions; type `show c' for details.
 ```
+</div>
