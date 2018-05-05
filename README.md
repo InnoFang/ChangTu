@@ -13,9 +13,9 @@
 
 <br />
 
-## Co-worker (合作者)
+# Co-worker (合作者)
 
- + [DreamYHD](https://github.com/DreamYHD)
+ [DreamYHD](https://github.com/DreamYHD)
 
 <br />
 
@@ -70,7 +70,7 @@
 
 <br />
 
-## Third-party libraries used (第三方库使用)
+# Third-party libraries used (第三方库使用)
 
 		
 	implementation 'com.android.support:appcompat-v7:27.1.1'
@@ -90,7 +90,7 @@
 	implementation files('libs/BaiduLBS_Android.jar')
     
 
-## Screenshot (截图)
+# Screenshot (截图)
 
 ![主界面](https://github.com/InnoFang/ChangTu/blob/master/picture/ppt_%E4%B8%BB%E7%95%8C%E9%9D%A2.png)![开始行程](https://github.com/InnoFang/ChangTu/blob/master/picture/ppt_%E5%BC%80%E5%A7%8B%E8%A1%8C%E7%A8%8B.png)
 
@@ -100,7 +100,7 @@
 ![附近列表](https://github.com/InnoFang/ChangTu/blob/master/picture/ppt_%E9%99%84%E8%BF%91%E5%88%97%E8%A1%A8.png)![附近评论](https://github.com/InnoFang/ChangTu/blob/master/picture/ppt_%E9%99%84%E8%BF%91%E8%AF%84%E8%AE%BA.png)
 
 
-## [License](https://github.com/InnoFang/ChangTu/blob/master/LICENSE)
+# [License](https://github.com/InnoFang/ChangTu/blob/master/LICENSE)
   
 ```
   ChangTu  Copyright (C) 2016  InnoFang
