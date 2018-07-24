@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://github.com/InnoFang/ChangTu/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" height="100px" width="100px"/>
+<img src="https://github.com/InnoFang/ChangTu/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png?raw=true" height="100px" width="100px"/>
 
 <h1> ChangTu (畅途) </h1>
 
@@ -13,13 +13,13 @@
 
 <br />
 
-<h1> Co-worker (合作者) </h1>
+<h2> Co-worker (合作者) </h2>
 
  <a href="https://github.com/DreamYHD">DreamYHD</a>
 
 <br />
 
-## Feature (功能)
+<h2 Feature (功能)</h2>
 
    <table border="1px solid green" style="border-collapse: collapse" cellpadding="15">
         <tr>
@@ -70,27 +70,27 @@
 
 <br />
 
-<h1>Third-party libraries used (第三方库使用)</h1>
+<h2>Third-party libraries used (第三方库使用)</h2>
 
-		
-	implementation 'com.android.support:appcompat-v7:27.1.1'
-	implementation 'com.android.support:support-v4:27.1.1'
-	implementation 'com.android.support:design:27.1.1'
-	implementation 'com.android.support:recyclerview-v7:27.1.1'
-	implementation 'com.android.support:cardview-v7:27.1.1'
-	implementation 'cn.bmob.android:bmob-sdk:3.5.1'
-	implementation 'cn.bmob.android:bmob-push:0.8'
-	implementation 'cn.bmob.android:bmob-im:2.0.5@aar'
-	implementation 'com.getbase:floatingactionbutton:1.10.1'
-	implementation 'com.alibaba:fastjson:1.1.46.android'
-	implementation 'cn.qqtheme.framework:WheelPicker:1.4.3'
-	implementation 'com.kyleduo.switchbutton:library:1.4.4'
+```
+implementation 'com.android.support:appcompat-v7:27.1.1'
+implementation 'com.android.support:support-v4:27.1.1'
+implementation 'com.android.support:design:27.1.1'
+implementation 'com.android.support:recyclerview-v7:27.1.1'
+implementation 'com.android.support:cardview-v7:27.1.1'
+implementation 'cn.bmob.android:bmob-sdk:3.5.1'
+implementation 'cn.bmob.android:bmob-push:0.8'
+implementation 'cn.bmob.android:bmob-im:2.0.5@aar'
+implementation 'com.getbase:floatingactionbutton:1.10.1'
+implementation 'com.alibaba:fastjson:1.1.46.android'
+implementation 'cn.qqtheme.framework:WheelPicker:1.4.3'
+implementation 'com.kyleduo.switchbutton:library:1.4.4'
 
-	implementation files('libs/BaiduTraceSDK_v2_1_12.jar')
-	implementation files('libs/BaiduLBS_Android.jar')
-    
+implementation files('libs/BaiduTraceSDK_v2_1_12.jar')
+implementation files('libs/BaiduLBS_Android.jar')
+```
 
-# Screenshot (截图)
+<h2>Screenshot (截图)</h2>
 
 <img src="https://github.com/InnoFang/ChangTu/blob/master/picture/ppt_%E4%B8%BB%E7%95%8C%E9%9D%A2.png?raw=true"/><img src="https://github.com/InnoFang/ChangTu/blob/master/picture/ppt_%E5%BC%80%E5%A7%8B%E8%A1%8C%E7%A8%8B.png?raw=true"/>
 
