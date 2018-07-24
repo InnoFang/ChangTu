@@ -19,7 +19,7 @@
 
 <br />
 
-<h2 Feature (功能)</h2>
+<h2> Feature (功能)</h2>
 
    <table border="1px solid green" style="border-collapse: collapse" cellpadding="15">
         <tr>
@@ -72,6 +72,8 @@
 
 <h2>Third-party libraries used (第三方库使用)</h2>
 
+</div>
+
 ```
 implementation 'com.android.support:appcompat-v7:27.1.1'
 implementation 'com.android.support:support-v4:27.1.1'
@@ -89,6 +91,10 @@ implementation 'com.kyleduo.switchbutton:library:1.4.4'
 implementation files('libs/BaiduTraceSDK_v2_1_12.jar')
 implementation files('libs/BaiduLBS_Android.jar')
 ```
+
+<br/>
+
+<div align="center">
 
 <h2>Screenshot (截图)</h2>
 
