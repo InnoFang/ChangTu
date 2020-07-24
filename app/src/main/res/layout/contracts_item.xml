@@ -39,7 +39,7 @@
                     android:layout_marginLeft="16dp"
                     android:textColor="#51b851"
                     android:textSize="16sp"
-                    tools:text="13326889954"
+                    tools:text="12345678910"
                     />
             </LinearLayout>
            <Button
