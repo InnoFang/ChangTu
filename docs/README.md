@@ -96,23 +96,13 @@ implementation files('libs/BaiduLBS_Android.jar')
 
 <div align="center">
 
-<h2>Screenshot (截图)</h2>
-
-<img src="https://github.com/InnoFang/ChangTu/blob/master/picture/ppt_%E4%B8%BB%E7%95%8C%E9%9D%A2.png?raw=true"/><img src="https://github.com/InnoFang/ChangTu/blob/master/picture/ppt_%E5%BC%80%E5%A7%8B%E8%A1%8C%E7%A8%8B.png?raw=true"/>
-
-<img src="https://github.com/InnoFang/ChangTu/blob/master/picture/ppt_%E4%BD%8D%E7%BD%AE%E5%85%B1%E4%BA%AB_1.png?raw=true"/><img src="https://github.com/InnoFang/ChangTu/blob/master/picture/ppt_%E5%85%B1%E4%BA%AB%E4%BD%8D%E7%BD%AE_2.png?raw=true"/>
-<img src="https://github.com/InnoFang/ChangTu/blob/master/picture/ppt_%E6%92%AD%E6%8A%A5%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E6%9D%BF.png?raw=true"/><img src="https://github.com/InnoFang/ChangTu/blob/master/picture/ppt_%E7%B4%A7%E6%80%A5%E6%B1%82%E5%8A%A9.png?raw=true"/>
-<img src="https://github.com/InnoFang/ChangTu/blob/master/picture/ppt_%E8%B6%B3%E8%BF%B9%E8%AE%B0%E5%BD%95.png?raw=true"/><img src="https://github.com/InnoFang/ChangTu/blob/master/picture/ppt_%E8%BD%A8%E8%BF%B9%E6%98%BE%E7%A4%BA.png?raw=true"/>
-<img src="https://github.com/InnoFang/ChangTu/blob/master/picture/ppt_%E9%99%84%E8%BF%91%E5%88%97%E8%A1%A8.png?raw=true"/><img src="https://github.com/InnoFang/ChangTu/blob/master/picture/ppt_%E9%99%84%E8%BF%91%E8%AF%84%E8%AE%BA.png?raw=true"/>
-
-
 <h1><a href="https://github.com/InnoFang/ChangTu/blob/master/LICENSE">License</a></h1>
  
- </div> 
+</div> 
 
 ```
-  ChangTu  Copyright (C) 2016  InnoFang
-  This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
-  This is free software, and you are welcome to redistribute it
-  under certain conditions; type `show c' for details.
+ ChangTu  Copyright (C) 2016  InnoFang
+ This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
+ This is free software, and you are welcome to redistribute it
+ under certain conditions; type `show c' for details.
 ```
