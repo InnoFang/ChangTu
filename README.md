@@ -91,17 +91,6 @@
 	implementation files('libs/BaiduTraceSDK_v2_1_12.jar')
 	implementation files('libs/BaiduLBS_Android.jar')
     
-
-# Screenshot (截图)
-
-![主界面](https://cdn.jsdelivr.net/gh/innofang/changtu/picture/ppt_%E4%B8%BB%E7%95%8C%E9%9D%A2.png)![开始行程](https://cdn.jsdelivr.net/gh/innofang/changtu/picture/ppt_%E5%BC%80%E5%A7%8B%E8%A1%8C%E7%A8%8B.png)
-
-![位置共享-1](https://cdn.jsdelivr.net/gh/innofang/changtu/picture/ppt_%E4%BD%8D%E7%BD%AE%E5%85%B1%E4%BA%AB_1.png)![位置共享-2](https://cdn.jsdelivr.net/gh/innofang/changtu/picture/ppt_%E5%85%B1%E4%BA%AB%E4%BD%8D%E7%BD%AE_2.png)
-![自定义播报模板](https://cdn.jsdelivr.net/gh/innofang/changtu/picture/ppt_%E6%92%AD%E6%8A%A5%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E6%9D%BF.png)![紧急求助](https://cdn.jsdelivr.net/gh/innofang/changtu/picture/ppt_%E7%B4%A7%E6%80%A5%E6%B1%82%E5%8A%A9.png)
-![足迹记录](https://cdn.jsdelivr.net/gh/innofang/changtu/picture/ppt_%E8%B6%B3%E8%BF%B9%E8%AE%B0%E5%BD%95.png)![轨迹显示](https://cdn.jsdelivr.net/gh/innofang/changtu/picture/ppt_%E8%BD%A8%E8%BF%B9%E6%98%BE%E7%A4%BA.png)
-![附近列表](https://cdn.jsdelivr.net/gh/innofang/changtu/picture/ppt_%E9%99%84%E8%BF%91%E5%88%97%E8%A1%A8.png)![附近评论](https://cdn.jsdelivr.net/gh/innofang/changtu/picture/ppt_%E9%99%84%E8%BF%91%E8%AF%84%E8%AE%BA.png)
-
-
 # [License](https://cdn.jsdelivr.net/gh/innofang/changtu/LICENSE)
   
 ```
